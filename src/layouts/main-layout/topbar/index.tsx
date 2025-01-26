@@ -98,7 +98,7 @@ const Topbar = ({
           <IconButton onClick={() => {navigate(paths.notification)}}>
             <Badge
               color="error"
-              badgeContent={2}
+              badgeContent={"!"}
               sx={{ '& .MuiBadge-badge': { top: 6, right: 2 } }}
             >
               <IconifyIcon icon="mdi:bell-outline" />

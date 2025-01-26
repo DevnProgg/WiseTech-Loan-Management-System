@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
@@ -6,9 +6,48 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconifyIcon from 'components/base/IconifyIcon';
-import DataTable from './DataTable';
+import DataTable from '../../Loans/History/DataTable';
+import { LoanData, useDataChange, useLender, useLoanData, useMessages } from 'Store';
+import { supabase } from 'data/database';
 
 const RecentOrders = () => {
+  const id = useLender((state) => state.lender.lender_id);
+  const { setloans } = useLoanData();
+  const { addMessage } = useMessages();
+  useEffect(() => {
+    const fetchLoanData = async () => {
+      try {
+        const { data, error } = await supabase.from("getloandata").select("loan_id, names, amount, status").eq("lender_id", id);
+
+        if (error) {
+          throw error;
+        }
+
+        const loans: LoanData[] = data.map((loan: 
+          { loan_id: string; 
+            names: string; 
+            amount: number; 
+            status: string }) => ({
+          id: loan.loan_id,
+          borrowerName: loan.names,
+          owing: loan.amount,
+          Status: loan.status
+        }));
+
+        setloans(loans);
+        addMessage({ message: "Loan data fetched successfully", serverity: "success" });
+      } catch (error) {
+        if (error instanceof Error) {
+          addMessage({ message: error.message, serverity: "error" });
+        } else {
+          addMessage({ message: "Failed to get loans", serverity: "error" });
+        }
+      }
+    };
+
+    fetchLoanData();
+  }, [useDataChange.getState().loanChange]);
+ 
   const [searchText, setSearchText] = useState('');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

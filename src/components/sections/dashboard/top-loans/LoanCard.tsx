@@ -2,10 +2,10 @@ import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
-import { TopLoan } from 'data/topLoanData';
+import { LoanData } from 'Store';
 
 interface LoanCardProps {
-  data: TopLoan;
+  data: LoanData;
 }
 
 const LoanCard = ({ data }: LoanCardProps) => {
@@ -22,7 +22,7 @@ const LoanCard = ({ data }: LoanCardProps) => {
               display="block"
               mb={0.75}
             >
-              {data.title}
+              {data.borrowerName}
             </Typography>
             <Typography
               variant="body1"
@@ -31,7 +31,7 @@ const LoanCard = ({ data }: LoanCardProps) => {
               display="block"
               mt={0.5}
             >
-              {data.price}
+              {data.owing}
             </Typography>
           </div>
         </Stack>

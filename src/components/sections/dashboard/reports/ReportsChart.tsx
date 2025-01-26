@@ -86,7 +86,7 @@ const ReportsChart = ({ data, ...rest }: ClientChartProps) => {
             const dataValue = Math.round(params[0].data);
             const arrowPosition = isTopOffset ? 'bottom:-14px;' : 'top:-14px;';
             return `<div style="position:relative; border-radius:10px;">
-              <p style="font-size:${theme.typography.caption.fontSize}; font-weight:400; text-align:center;">Sales</p>
+              <p style="font-size:${theme.typography.caption.fontSize}; font-weight:400; text-align:center;">Revenue</p>
               <p style="font-size:${theme.typography.body2.fontSize}; font-weight:600; text-align:center;">${formatNumber(dataValue)}</p>
               <span style="position:absolute; ${arrowPosition} left:50%; transform:translate(-50%) rotate(45deg); width:12px; height:12px; background:${theme.palette.text.primary}; border-top:none; border-left:none; border-right:none; border-bottom:none; z-index:-10000;"></span>
             </div>`;
@@ -97,17 +97,18 @@ const ReportsChart = ({ data, ...rest }: ClientChartProps) => {
       xAxis: {
         type: 'category',
         data: [
-          '10am',
-          '11am',
-          '12pm',
-          '01pm',
-          '02pm',
-          '03pm',
-          '04pm',
-          '05pm',
-          '06pm',
-          '07pm',
-          '08pm',
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
         ],
         axisTick: {
           show: false,

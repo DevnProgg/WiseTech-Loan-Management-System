@@ -14,16 +14,6 @@ const AnalyticsData = [
     value: 45,
     name: 'Pending',
   },
-  {
-    id: 3,
-    value: 35,
-    name: 'Installs',
-  },
-  {
-    id: 4,
-    value: 30,
-    name: '',
-  },
 ];
 
 const Analytics = () => {

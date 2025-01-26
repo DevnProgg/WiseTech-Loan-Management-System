@@ -12,6 +12,7 @@ export default {
   borrowers: `/${rootPaths.pageRoot}/borrowers`,
   notification: `/${rootPaths.pageRoot}/notification`,
   settings: `/${rootPaths.pageRoot}/settings`,
+  networkError: `/${rootPaths.pageRoot}/networkissue`,
 
   signin: `/${rootPaths.authRoot}/signin`,
   signup: `/${rootPaths.authRoot}/signup`,

@@ -1,10 +1,10 @@
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Notifications from 'components/sections/Notifications';
-import { notifications as data } from 'data/Notifications';
 
 
 const NotificationPage = () => {
+
   return (
     <Grid container px={3.75} spacing={3.75}>
         <Grid item xs={12}>
@@ -13,7 +13,7 @@ const NotificationPage = () => {
             </Typography>
         </Grid>
         <Grid item xs={12}>
-            <Notifications notifications={data}/>
+            <Notifications />
         </Grid>
     </Grid>
   );

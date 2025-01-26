@@ -12,7 +12,7 @@ const Footer = () => {
       letterSpacing={0.5}
       fontWeight={500}
     >
-      Fund Wise 2024
+      Powered by Wise Tech 2025
     </Typography>
   );
 };

@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "Fund Wise",
+        "title": "Fundwise",
         "width": 800,
         "height": 600,
         "resizable": true,

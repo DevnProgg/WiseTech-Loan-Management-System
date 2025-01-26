@@ -7,6 +7,11 @@ import Footer from './footer';
 import FAB from 'components/base/FAB';
 import AddLoan from 'pages/AddLoan';
 import Updateuser from 'pages/UpdateUser';
+import { useNavigate } from 'react-router-dom';
+import paths from 'routes/paths';
+import { useSession } from 'Store';
+import OldLoan from 'pages/OldLoan';
+import Cookie from 'components/base/Cookie';
 
 interface FabStyle {
   position: 'fixed';
@@ -21,9 +26,17 @@ const fabStyle : FabStyle = {
 };
 
 const MainLayout = ({ children }: React.PropsWithChildren) => {
-  const [expand, setExpand] = React.useState(false);
+  const locate = useNavigate();
+  const islogged = useSession((state) => (state.isLogged)) 
+  const [expand, setExpand] = React.useState(true);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  React.useEffect(()=>{
+
+    if (!islogged){
+        locate(paths.signin);
+    }
+  }, [])
 
   const drawerWidth = 240;
   const miniDrawerWidth = 90;
@@ -48,6 +61,8 @@ const MainLayout = ({ children }: React.PropsWithChildren) => {
     <Box mt={12}>{children}
       <AddLoan />
       <Updateuser />
+      <OldLoan />
+      <Cookie />
     <FAB styles={fabStyle} />
     </Box>
     <Footer />

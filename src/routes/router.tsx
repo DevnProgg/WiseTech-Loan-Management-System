@@ -14,6 +14,7 @@ const Loans = lazy(()=> import('pages/Loans'));
 const Borrowers = lazy(()=> import('pages/Borrowers'));
 const NotificationPage = lazy(()=> import('pages/Notifications'));
 const Settings = lazy(()=> import('pages/Settings'));
+const InternetConnectivity = lazy(()=> import('pages/Offline'))
 const SignIn = lazy(() => import('pages/authentication/SignIn'));
 const SignUp = lazy(() => import('pages/authentication/SignUp'));
 const ResetPassword = lazy(() => import('pages/authentication/ResetPassword'));
@@ -125,6 +126,23 @@ const routes = [
             path: paths.settings,
             index: true,
             element: <Settings />,
+          },
+        ],
+      },
+      {
+        path: rootPaths.pageRoot,
+        element: (
+          <MainLayout>
+            <Suspense fallback={<PageLoader />}>
+              <Outlet />
+            </Suspense>
+          </MainLayout>
+        ),
+        children: [
+          {
+            path: paths.networkError,
+            index: true,
+            element: <InternetConnectivity />,
           },
         ],
       },

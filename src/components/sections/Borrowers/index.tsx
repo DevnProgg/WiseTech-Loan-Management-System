@@ -1,5 +1,4 @@
-import { useState, ChangeEvent } from 'react';
-import Box from '@mui/material/Box';
+import { useState, ChangeEvent, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
@@ -7,9 +6,53 @@ import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconifyIcon from 'components/base/IconifyIcon';
 import DataTable from './dataTable';
+import { BorrowerData, useBorrowerData, useDataChange, useLender, useMessages } from 'Store';
+import { supabase } from 'data/database';
 
 const BorrowersTable = () => {
   const [searchText, setSearchText] = useState('');
+  const id = useLender((state) => state.lender.lender_id);
+  const { setBorrowers } = useBorrowerData();
+  const { addMessage } = useMessages();
+
+  useEffect(() => {
+    const fetchBorrowers = async () => {
+      try {
+        const { data, error } = await supabase.from("getborrowers").select("borrower_id, names, phone_number, email_address, address, status").eq("lender_id", id);
+
+        if (error) {
+          throw error;
+        }
+
+        const borrowers: BorrowerData[] = data.map((Borrower: {
+          borrower_id: string;
+          names: string;
+          phone_number: string;
+          email_address: string;
+          address: string;
+          status: string;
+        }) => ({
+          id: Borrower.borrower_id,
+          borrowerName: Borrower.names,
+          phonenumber: Borrower.phone_number,
+          email: Borrower.email_address,
+          address: Borrower.address,
+          Status: Borrower.status
+        }));
+
+        setBorrowers(borrowers);
+        addMessage({ message: "Borrower data fetched successfully", serverity: "success" });
+      } catch (error) {
+        if (error instanceof Error) {
+          addMessage({ message: error.message, serverity: "error" });
+        } else {
+          addMessage({ message: "Failed to get borrowers", serverity: "error" });
+        }
+      }
+    };
+
+    fetchBorrowers();
+  }, [useDataChange((state) => state.borrowerChange)]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -34,20 +77,16 @@ const BorrowersTable = () => {
           placeholder="Search here"
           value={searchText}
           onChange={handleInputChange}
-          sx={{ width: 1, maxWidth: { xs: 260, sm: 240 } }}
           InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconifyIcon icon="prime:search" />
+            startAdornment: (
+              <InputAdornment position="start">
+                <IconifyIcon icon="eva:search-outline" />
               </InputAdornment>
             ),
           }}
         />
       </Stack>
-
-      <Box mt={{ xs: 1.5, sm: 0.75 }} height={305} flex={1}>
-        <DataTable searchText={searchText} />
-      </Box>
+      <DataTable searchText={searchText} />
     </Paper>
   );
 };

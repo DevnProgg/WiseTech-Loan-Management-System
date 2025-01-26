@@ -1,5 +1,4 @@
 
-
 export interface TopLoan {
   id: number | string;
   title: string;
@@ -23,3 +22,7 @@ export const topProductsData: TopLoan[] = [
     price: 'LSL 5 678.00',
   },
 ];
+
+export const getTopLoans = async ( ) =>{
+  
+}

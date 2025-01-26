@@ -7,14 +7,16 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ButtonBase from '@mui/material/ButtonBase';
 import InputAdornment from '@mui/material/InputAdornment';
-//import FormControlLabel from '@mui/material/FormControlLabel';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-//import Checkbox from '@mui/material/Checkbox';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
 import Logo from 'assets/FindWise.png';
+import { supabase } from 'data/database';
+import { LenderInfo, useLender, useMessages, useSession} from 'Store';
+import { useNavigate } from 'react-router-dom';
 import paths from 'routes/paths';
+import CircularProgress from '@mui/material/CircularProgress';
 
 interface User {
   [key: string]: string;
@@ -23,14 +25,38 @@ interface User {
 const SignIn = () => {
   const [user, setUser] = useState<User>({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const{addMessage} = useMessages();
+  const {setLender} = useLender();
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(user);
+    try{
+      const {data, error} = await supabase.from("Lenders").select(
+        "lender_id, business_name, phone_number, email_address, interest_rate, username, password"
+      ).eq("username", user["email"]).eq("password", user["password"]);
+      if (error) {
+          throw error;
+      }
+      const lender : LenderInfo = data![0];
+      setLender(lender)
+      
+      addMessage({message: "Login successful", serverity: "success"})
+      useSession.setState({isLogged : true})
+      navigate(paths.dashboard)
+  }
+  catch(error){
+    if (error instanceof Error) {
+      addMessage({message: error.message, serverity: "error"});
+    } else {
+      addMessage({message: "An unknown error occurred", serverity: "error"});
+    }
+  }
   };
 
   return (
@@ -44,18 +70,17 @@ const SignIn = () => {
 
       <Divider sx={{ my: 4.5 }}>Welcome</Divider>
 
-      <Box component="form" onSubmit={handleSubmit}>
+      <Box component="form" onSubmit={(e) => {handleSubmit(e); setLoading(true);}}>
         <TextField
           id="email"
           name="email"
-          type="email"
+          type="text"
           color="secondary"
-          label="Email Address"
+          label="Username"
           value={user.email}
           onChange={handleInputChange}
           variant="filled"
           placeholder="mail@example.com"
-          autoComplete="email"
           sx={{ mt: 3 }}
           fullWidth
           autoFocus
@@ -111,24 +136,12 @@ const SignIn = () => {
             Reset password?
           </Link>
         </Stack>*/}
-
-        <Button type="submit" variant="contained" size="large" sx={{ mt: 3 }} fullWidth>
+        {
+          loading ? <center><CircularProgress /></center> : <Button type="submit" variant="contained" size="large" sx={{ mt: 3 }} fullWidth>
           Sign In
         </Button>
+        }
       </Box>
-
-      <Typography
-        mt={4}
-        pb={12}
-        variant="body2"
-        textAlign={{ xs: 'center', md: 'left' }}
-        letterSpacing={0.25}
-      >
-        Don’t have account yet?{' '}
-        <Link href={paths.signup} color="primary.main" fontWeight={600}>
-          New Account
-        </Link>
-      </Typography>
     </Stack>
   );
 };

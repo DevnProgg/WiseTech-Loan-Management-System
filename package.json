@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "tauri": "tauri",
     "dev": "vite",
+    "tauri": "tauri",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -18,6 +18,8 @@
     "@heroicons/react": "^2.2.0",
     "@mui/material": "^5.15.20",
     "@mui/x-data-grid": "^7.18.0",
+    "@supabase/supabase-js": "^2.48.0",
+    "@tauri-apps/plugin-sql": "^2.2.0",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "class-variance-authority": "^0.7.1",
@@ -37,7 +39,7 @@
   },
   "devDependencies": {
     "@iconify/react": "^5.0.1",
-    "@tauri-apps/cli": "^2.1.0",
+    "@tauri-apps/cli": "^2.2.5",
     "@types/chart.js": "^2.9.41",
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.3",

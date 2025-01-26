@@ -53,19 +53,7 @@ const sitemap: MenuItem[] = [
     subheader: 'Settings',
     path: paths.settings,
     icon: 'solar:settings-bold',
-  },
-  {
-    id: 'signin',
-    subheader: 'Sign In',
-    path: paths.signin,
-    icon: 'mage:lock-fill',
-  },
-  {
-    id: 'signup',
-    subheader: 'Sign Up',
-    path: paths.signup,
-    icon: 'mage:user-plus-fill',
-  },
+  }
 ];
 
 export default sitemap;
