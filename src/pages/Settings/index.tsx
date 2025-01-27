@@ -7,29 +7,33 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import paths from 'routes/paths';
 import {Grid, TextField, Typography } from '@mui/material';
-import axios from "axios"
+import { useLender, useMessages } from 'Store';
+import { error } from 'console';
+import { supabase } from 'data/database';
 
-const api = axios.create({
-  baseURL: 'http://localhost'
-})
 
 export default function Settings() {
 
   //state
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
-  const [username, setUsername] = React.useState("")
-  const [password, setPassword] = React.useState("")
-  const [interest, setInterest] = React.useState("0")
-  const [number, setNumber] = React.useState("")
-  const [email, setEmail] = React.useState("")
-  const [business, setBusiness] = React.useState("")
-  const id = "";
+  const [username, setUsername] = React.useState(useLender((state) => state.lender.username))
+  const [password, setPassword] = React.useState(useLender((state) => state.lender.password))
+  const [interest, setInterest] = React.useState(useLender((state) => state.lender.interest_rate.toString))
+  const [number, setNumber] = React.useState(useLender((state) => state.lender.phone_number.toString))
+  const [email, setEmail] = React.useState(useLender((state) => state.lender.email_address))
+  const [business, setBusiness] = React.useState(useLender((state) => state.lender.business_name))
+  const id = useLender((state) => state.lender.lender_id);
+  const [loading, setLoading] = React.useState(false)
+  const { addMessage } = useMessages()
+  const { setLender } = useLender()
 
   //functions
   const handleClose = () => {
+    if(!loading){
     navigate(paths.dashboard)
     setOpen(false);
+    }
   };
 
   const handleUsername = (e: string) => {
@@ -56,22 +60,27 @@ export default function Settings() {
     setBusiness(e)
   }
 
-  const handleSave = () => {
-    const requestBody = {
-        "id" : id,
-        "name" : business,
-        "email" : email,
-        "phone" : number,
-        "interest" : interest,
-        "username" : username,
-        "password" : password
-    }
+  const handleSave = async () => {
 
-    api.put('/api/v1/lender/update',requestBody).then((res) => {
-      console.log(res)
-    }).catch((e) => {
-      console.log(e)
-    })
+    try{
+      const {data, error} = await supabase.from("Lenders").update({
+        "username" : username,
+        "password" : password,
+        "interest_rate" : interest,
+        "phone_number" : number,
+        "email_address" : email,
+        "business_name" : business
+      }).eq("lender_id", id).select( "lender_id, business_name, phone_number, email_address, interest_rate, username, password" )
+
+      if(error) {
+        throw error;
+      }
+
+      setLender(data);
+
+    }catch(error){
+        addMessage({message: "Error Saving Settings", serverity: "error"})
+    }
 
     navigate(paths.dashboard)
     setOpen(false);

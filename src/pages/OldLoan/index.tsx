@@ -4,23 +4,29 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Divider, Grid, TextField, Typography, Autocomplete } from '@mui/material';
-import { useLender, useOpenCard, useVet } from 'Store';
+import { Divider, Grid, TextField, Typography, Autocomplete, LinearProgress } from '@mui/material';
+import { useDataChange, useLender, useMessages, useOpenCard, useVet } from 'Store';
 import { supabase } from 'data/database';
 
 
 export default function OldLoan() {
   const open = useVet((state) => (state.isVet))
-  const handleClose = () => {
-    useOpenCard.setState({openCard: false})
-    useVet.setState({isVet: false})
-  };
   const [borrower, setBorrower] = React.useState("");
   const [loan, setLoan] = React.useState("0");
   const [date, setDate] = React.useState("");
   const [borrowers, setBorrowers] = React.useState<{ label: string }[]>([])
   const id = useLender((state) => state.lender.lender_id)
- 
+  const {setLoanChange} = useDataChange()
+  const {addMessage} = useMessages()
+  const [loading, setLoading] = React.useState(false)
+
+  const handleClose = () => {
+    if(!loading){
+    useOpenCard.setState({openCard: false})
+    useVet.setState({isVet: false})
+    }
+  };
+
   const handleSubmit = async () => {
     try {
       const {data, error} = await supabase.from('getborrowers').select("borrower_id").eq('names', borrower)
@@ -31,7 +37,12 @@ export default function OldLoan() {
 
       if(data) {
         const borrower_id : string = data[0]?.borrower_id
-        const {data: loanData, error: loanError} = await supabase.from('loans').insert({'lender_id' : id, 'borrower_id' : borrower_id, 'amount': loan, 'pay_date' : date, 'status' : 'pending'})
+        const {data: loanData, error: loanError} = await supabase.from('loans').insert({
+          'lender_id' : id,
+          'borrower_id' : borrower_id, 
+          'amount': loan, 
+          'pay_date' : date, 
+          'status' : 'pending'})
 
         if(loanError) {
           throw loanError
@@ -41,8 +52,12 @@ export default function OldLoan() {
           console.log(loanData)
         }
       }
+
+      setLoanChange()
+      addMessage({message: "Loan Added Successfully", serverity : "success"})
+      handleClose()
     }catch(error) {
-      console.log(error)
+      addMessage({message: "Failed To Add Loan", serverity: "error"})
     }
   }
 
@@ -97,12 +112,14 @@ export default function OldLoan() {
   </Grid>
 
 </DialogContent>
-<DialogActions>
+{
+  !loading ?  <DialogActions>
   <Button variant="text" color="secondary" onClick={handleClose}>Cancel</Button>
-  <Button variant="contained" onClick={handleSubmit} autoFocus>
+  <Button variant="contained" onClick={() => {setLoading(true); handleSubmit()}} autoFocus>
     Add Loan
   </Button>
-</DialogActions>
+</DialogActions> : <LinearProgress />
+}
 </>
 
 
