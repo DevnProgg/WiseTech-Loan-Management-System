@@ -6,9 +6,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import paths from 'routes/paths';
-import {Grid, TextField, Typography } from '@mui/material';
+import {Grid, LinearProgress, TextField, Typography } from '@mui/material';
 import { useLender, useMessages } from 'Store';
-import { error } from 'console';
 import { supabase } from 'data/database';
 
 
@@ -61,7 +60,7 @@ export default function Settings() {
   }
 
   const handleSave = async () => {
-
+    setLoading(true);
     try{
       const {data, error} = await supabase.from("Lenders").update({
         "username" : username,
@@ -76,7 +75,9 @@ export default function Settings() {
         throw error;
       }
 
-      setLender(data);
+      setLender(data[0]);
+      addMessage({message: "Settings Saved", serverity: "success"})
+      navigate(paths.dashboard);
 
     }catch(error){
         addMessage({message: "Error Saving Settings", serverity: "error"})
@@ -127,12 +128,13 @@ export default function Settings() {
           </Grid>
 
         </DialogContent>
-        <DialogActions>
+          {!loading ? <DialogActions>
           <Button color='primary' onClick={handleClose}>Exit</Button>
           <Button onClick={handleSave} autoFocus>
             Save & Exit
           </Button>
-        </DialogActions>
+        </DialogActions> :
+        <LinearProgress />}
       </Dialog>
     </React.Fragment>
   );
