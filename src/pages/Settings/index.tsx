@@ -18,8 +18,8 @@ export default function Settings() {
   const [open, setOpen] = React.useState(true);
   const [username, setUsername] = React.useState(useLender((state) => state.lender.username))
   const [password, setPassword] = React.useState(useLender((state) => state.lender.password))
-  const [interest, setInterest] = React.useState(useLender((state) => state.lender.interest_rate.toString))
-  const [number, setNumber] = React.useState(useLender((state) => state.lender.phone_number.toString))
+  const [interest, setInterest] = React.useState(useLender((state) => state.lender.interest_rate.toString()))
+  const [phone_number, setPhoneNumber] = React.useState(useLender((state) => state.lender.phone_number.toString()))
   const [email, setEmail] = React.useState(useLender((state) => state.lender.email_address))
   const [business, setBusiness] = React.useState(useLender((state) => state.lender.business_name))
   const id = useLender((state) => state.lender.lender_id);
@@ -44,11 +44,11 @@ export default function Settings() {
   }
 
   const handleInterest = (e : string) => {
-    setInterest(e)
+      setInterest(e)
   }
   
   const handleNumber = (e : string) => {
-    setNumber(e)
+    setPhoneNumber(e)
   }
 
   const handleEmail = (e : string) => {
@@ -66,7 +66,7 @@ export default function Settings() {
         "username" : username,
         "password" : password,
         "interest_rate" : interest,
-        "phone_number" : number,
+        "phone_number" : phone_number,
         "email_address" : email,
         "business_name" : business
       }).eq("lender_id", id).select( "lender_id, business_name, phone_number, email_address, interest_rate, username, password" )
@@ -107,7 +107,7 @@ export default function Settings() {
             </Grid>
             <Grid item xs={12}>
             <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-            <TextField color="primary" type='password' variant='outlined' label='Password' size='small' value={password} onChange={(e) => {handlePassword(e.target.value)}}/>
+            <TextField color="primary" type='text' variant='outlined' label='Password' size='small' value={password} onChange={(e) => {handlePassword(e.target.value)}}/>
             </Grid>
             <Grid item xs={12}>
             <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
@@ -115,7 +115,7 @@ export default function Settings() {
             </Grid>
             <Grid item xs={12}>
               <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-              <TextField color="primary" type='text' variant='outlined' label='Phone Number' value={number} size='small' onChange={(e) => {handleNumber(e.target.value)}} />
+              <TextField color="primary" type='text' variant='outlined' label='Phone Number' value={phone_number} size='small' onChange={(e) => {handleNumber(e.target.value)}} />
             </Grid>
             <Grid item xs={12}>
               <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
