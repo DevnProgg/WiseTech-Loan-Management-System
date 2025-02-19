@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Divider, Grid, TextField, Typography, Autocomplete, LinearProgress } from '@mui/material';
+import { Divider, Grid, TextField, Typography, Autocomplete, LinearProgress, Alert } from '@mui/material';
 import { useDataChange, useLender, useMessages, useOpenCard, useVet } from 'Store';
 import { supabase } from 'data/database';
 
@@ -19,6 +19,7 @@ export default function OldLoan() {
   const {setLoanChange} = useDataChange()
   const {addMessage} = useMessages()
   const [loading, setLoading] = React.useState(false)
+  const [fail, setFail] = React.useState(false)
 
   const handleClose = () => {
     if(!loading){
@@ -57,6 +58,7 @@ export default function OldLoan() {
       addMessage({message: "Loan Added Successfully", serverity : "success"})
       handleClose()
     }catch(error) {
+      setFail(true);
       addMessage({message: "Failed To Add Loan", serverity: "error"})
     }
   }
@@ -83,6 +85,7 @@ export default function OldLoan() {
   const element = <>
   <DialogTitle id="Add Loan" style={{marginBottom: '5%', textAlign: "center"}}>
   {"Add Loan"}
+  {fail ? <Alert severity="error">Failed To Add Loan</Alert> : null}
 </DialogTitle>
 <DialogContent>
   <Grid container px={3.75} spacing={3.75}>

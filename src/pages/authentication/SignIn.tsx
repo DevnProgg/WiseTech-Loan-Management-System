@@ -51,11 +51,7 @@ const SignIn = () => {
       navigate(paths.dashboard)
   }
   catch(error){
-    if (error instanceof Error) {
-      addMessage({message: error.message, serverity: "error"});
-    } else {
       addMessage({message: "An unknown error occurred", serverity: "error"});
-    }
   }
   };
 
