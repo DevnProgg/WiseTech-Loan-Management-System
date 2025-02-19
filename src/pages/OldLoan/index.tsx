@@ -15,7 +15,7 @@ export default function OldLoan() {
   const [loan, setLoan] = React.useState("0");
   const [date, setDate] = React.useState("");
   const [borrowers, setBorrowers] = React.useState<{ label: string }[]>([])
-  const id = useLender((state) => state.lender.lender_id)
+  const id = useLender((state) => state.lender.id)
   const {setLoanChange} = useDataChange()
   const {addMessage} = useMessages()
   const [loading, setLoading] = React.useState(false)
@@ -30,20 +30,19 @@ export default function OldLoan() {
 
   const handleSubmit = async () => {
     try {
-      const {data, error} = await supabase.from('getborrowers').select("borrower_id").eq('names', borrower)
+      const {data, error} = await supabase.from('getBorrowers').select("id").eq('name', borrower)
 
       if(error) {
         throw error
       }
 
       if(data) {
-        const borrower_id : string = data[0]?.borrower_id
-        const {data: loanData, error: loanError} = await supabase.from('loans').insert({
-          'lender_id' : id,
+        const borrower_id : string = data[0]?.id
+        const {data: loanData, error: loanError} = await supabase.from('loan').insert({
+          'id' : id,
           'borrower_id' : borrower_id, 
           'amount': loan, 
-          'pay_date' : date, 
-          'status' : 'pending'})
+          'start_payment_date' : date, })
 
         if(loanError) {
           throw loanError
@@ -66,7 +65,7 @@ export default function OldLoan() {
   React.useEffect(() => {
     const fetchData = async () => {
       try{
-        const {data, error} = await supabase.from('getborrowers').select("names").eq('lender_id', id)
+        const {data, error} = await supabase.from('getBorrowers').select("names").eq('id', id)
 
         if(error) {
           throw error

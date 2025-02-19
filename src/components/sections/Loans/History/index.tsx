@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useEffect } from 'react';
+import { useState, ChangeEvent, /*useEffect*/ } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
@@ -7,17 +7,19 @@ import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconifyIcon from 'components/base/IconifyIcon';
 import DataTable from '../../Loans/History/DataTable';
+/*
 import { LoanData, useDataChange, useLender, useLoanData, useMessages } from 'Store';
-import { supabase } from 'data/database';
+import { supabase } from 'data/database';*/
 
 const History = () => {
-  const id = useLender((state) => state.lender.lender_id);
+  /*
+  const id = useLender((state) => state.lender.id);
   const { setloans } = useLoanData();
   const { addMessage } = useMessages();
   useEffect(() => {
     const fetchLoanData = async () => {
       try {
-        const { data, error } = await supabase.from("getloandata").select("loan_id, names, amount, status").eq("lender_id", id);
+        const { data, error } = await supabase.from("getloandata").select("loan_id, names, amount, status").eq("id", id);
 
         if (error) {
           throw error;
@@ -46,7 +48,7 @@ const History = () => {
     };
 
     fetchLoanData();
-  }, [useDataChange.getState().loanChange]);
+  }, [useDataChange.getState().loanChange]);*/
 
   const [searchText, setSearchText] = useState('');
 

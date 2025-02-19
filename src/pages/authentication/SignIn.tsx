@@ -37,10 +37,14 @@ const SignIn = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try{
-      const {data, error} = await supabase.from("Lenders").select(
-        "lender_id, business_name, phone_number, email_address, interest_rate, username, password"
+      const {data, error} = await supabase.from("lender").select(
+        "id, business_name, phone_number, email_address, Interest_rate, username, password"
       ).eq("username", user["email"]).eq("password", user["password"]);
       if (error) {
+          throw error;
+      }
+      if (data?.length === 0) {
+          addMessage({message: "Invalid username or password", serverity: "error"})
           throw error;
       }
       const lender : LenderInfo = data![0];

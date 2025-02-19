@@ -41,11 +41,11 @@ export const useVet = create <vetBorrower> (() => ({
 
 //store Lender infomation
 export type LenderInfo = {
-    lender_id: string;
+    id: string;
 	business_name : string;
-	phone_number : number;
+	phone_number : string;
 	email_address : string;
-	interest_rate : number;
+	Interest_rate : number;
 	username : string;
 	password : string;
 }
@@ -57,11 +57,11 @@ interface LenderInfoState {
 
 export const useLender = create <LenderInfoState> ((set) => ({
     lender : {
-        lender_id : "",
+        id : "",
         business_name : "",
-        phone_number : 0,
+        phone_number : "",
         email_address : "",
-        interest_rate : 0,
+        Interest_rate : 0,
         username : "",
         password : "",
     },
@@ -99,7 +99,6 @@ export interface BorrowerData {
     borrowerName : string;
     phonenumber : string;
     email : string;
-    address : string;
     Status : string;
 }
 

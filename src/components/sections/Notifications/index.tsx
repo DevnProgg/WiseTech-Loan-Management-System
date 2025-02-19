@@ -21,12 +21,12 @@ const Notifications = () => {
           id: number;
           title: string;
           message: string;
-          created_at: string;
+          date: string;
         }) => ({
           id: notification.id,
           title: notification.title,
           message: notification.message,
-          date: notification.created_at,
+          date: notification.date,
         }));
 
         console.log(data)

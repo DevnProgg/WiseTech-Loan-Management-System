@@ -18,11 +18,11 @@ export default function Settings() {
   const [open, setOpen] = React.useState(true);
   const [username, setUsername] = React.useState(useLender((state) => state.lender.username))
   const [password, setPassword] = React.useState(useLender((state) => state.lender.password))
-  const [interest, setInterest] = React.useState(useLender((state) => state.lender.interest_rate.toString()))
+  const [interest, setInterest] = React.useState(useLender((state) => state.lender.Interest_rate.toString()))
   const [phone_number, setPhoneNumber] = React.useState(useLender((state) => state.lender.phone_number.toString()))
   const [email, setEmail] = React.useState(useLender((state) => state.lender.email_address))
   const [business, setBusiness] = React.useState(useLender((state) => state.lender.business_name))
-  const id = useLender((state) => state.lender.lender_id);
+  const id = useLender((state) => state.lender.id);
   const [loading, setLoading] = React.useState(false)
   const { addMessage } = useMessages()
   const { setLender } = useLender()
@@ -62,14 +62,14 @@ export default function Settings() {
   const handleSave = async () => {
     setLoading(true);
     try{
-      const {data, error} = await supabase.from("Lenders").update({
+      const {data, error} = await supabase.from("lender").update({
         "username" : username,
         "password" : password,
-        "interest_rate" : interest,
+        "Interest_rate" : interest,
         "phone_number" : phone_number,
         "email_address" : email,
         "business_name" : business
-      }).eq("lender_id", id).select( "lender_id, business_name, phone_number, email_address, interest_rate, username, password" )
+      }).eq("id", id).select( "id, business_name, phone_number, email_address, Interest_rate, username, password" )
 
       if(error) {
         throw error;

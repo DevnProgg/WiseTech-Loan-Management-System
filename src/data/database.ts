@@ -34,9 +34,9 @@ CREATE TABLE Loan (
     start_payment_date DATE NOT NULL,
     type VARCHAR(100) NOT NULL,
     duration INT default 1,
-    lender_id INT NOT NULL,
+    id INT NOT NULL,
     borrower_id INT NOT NULL,
-    FOREIGN KEY (lender_id) REFERENCES Lender(id) ON DELETE CASCADE,
+    FOREIGN KEY (id) REFERENCES Lender(id) ON DELETE CASCADE,
     FOREIGN KEY (borrower_id) REFERENCES Borrower(id) ON DELETE CASCADE
 );
 
@@ -63,7 +63,7 @@ CREATE TABLE DefaultRate(
 );
 
 create view getBorrowers as 
-select borrower.id, borrower.name, borrower.email_address, borrower.phone_number, loan.lender_id, loan.status
+select borrower.id, borrower.name, borrower.email_address, borrower.phone_number, loan.id, loan.status
 from loan 
 left join borrower
 on borrower.id = loan.borrower_id;

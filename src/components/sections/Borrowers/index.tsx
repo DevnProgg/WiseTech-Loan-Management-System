@@ -11,32 +11,30 @@ import { supabase } from 'data/database';
 
 const BorrowersTable = () => {
   const [searchText, setSearchText] = useState('');
-  const id = useLender((state) => state.lender.lender_id);
+  const id = useLender((state) => state.lender.id);
   const { setBorrowers } = useBorrowerData();
   const { addMessage } = useMessages();
 
   useEffect(() => {
     const fetchBorrowers = async () => {
       try {
-        const { data, error } = await supabase.from("getborrowers").select("borrower_id, names, phone_number, email_address, address, status").eq("lender_id", id);
+        const { data, error } = await supabase.from("getBorrowers").select("id, name, phone_number, email_address, status").eq("id", id);
 
         if (error) {
           throw error;
         }
 
         const borrowers: BorrowerData[] = data.map((Borrower: {
-          borrower_id: string;
-          names: string;
+          id: string;
+          name: string;
           phone_number: string;
           email_address: string;
-          address: string;
           status: string;
         }) => ({
-          id: Borrower.borrower_id,
-          borrowerName: Borrower.names,
+          id: Borrower.id,
+          borrowerName: Borrower.name,
           phonenumber: Borrower.phone_number,
           email: Borrower.email_address,
-          address: Borrower.address,
           Status: Borrower.status
         }));
 
