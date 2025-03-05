@@ -76,7 +76,9 @@ export interface LoanData {
     id: string;
     borrowerName: string;
     owing: number;
-    Status: string;
+    status: string;
+    type: string;
+    monthstorepay: number;
 }
 
 interface LoanDataState {

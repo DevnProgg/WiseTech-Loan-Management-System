@@ -18,7 +18,7 @@ const BorrowersTable = () => {
   useEffect(() => {
     const fetchBorrowers = async () => {
       try {
-        const { data, error } = await supabase.from("getBorrowers").select("id, name, phone_number, email_address, status").eq("id", id);
+        const { data, error } = await supabase.from("getborrowers").select("id, name, phone_number, email_address, status").eq("id", id);
 
         if (error) {
           throw error;

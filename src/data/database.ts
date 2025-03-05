@@ -62,7 +62,7 @@ CREATE TABLE DefaultRate(
   settled int not null
 );
 
-create view getBorrowers as 
+create view getborrowers as 
 select borrower.id, borrower.name, borrower.email_address, borrower.phone_number, loan.id, loan.status
 from loan 
 left join borrower

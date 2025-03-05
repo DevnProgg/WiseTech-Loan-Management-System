@@ -11,7 +11,7 @@ const Notifications = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const { data, error } = await supabase.from('Notifications').select('*');
+        const { data, error } = await supabase.from('notifications').select('*');
 
         if (error) {
           throw error;
@@ -29,7 +29,6 @@ const Notifications = () => {
           date: notification.date,
         }));
 
-        console.log(data)
 
         setNotifications(notifications);
         addMessage({ message: "Notifications fetched successfully", serverity: "success" });
@@ -52,12 +51,10 @@ const Notifications = () => {
         {
         notifications.map((notification)=>{
             return(
-                <>
                 <Alert severity={'warning'} key={notification.id} >
                     <AlertTitle>{notification.title + ' (' + notification.date + ')' }</AlertTitle>
                     {notification.message}
                 </Alert>
-                </>
             );
         })
         }

@@ -30,7 +30,7 @@ export default function OldLoan() {
 
   const handleSubmit = async () => {
     try {
-      const {data, error} = await supabase.from('getBorrowers').select("id").eq('name', borrower)
+      const {data, error} = await supabase.from('getborrowers').select("id").eq('name', borrower)
 
       if(error) {
         throw error
@@ -65,14 +65,14 @@ export default function OldLoan() {
   React.useEffect(() => {
     const fetchData = async () => {
       try{
-        const {data, error} = await supabase.from('getBorrowers').select("names").eq('id', id)
+        const {data, error} = await supabase.from('getborrowers').select("name").eq('id', id)
 
         if(error) {
           throw error
         }
 
         if(data) {
-          setBorrowers(data.map((item: { names: string }) => ({ label: item.names })))
+          setBorrowers(data.map((item: { name: string }) => ({ label: item.name })))
         }
       }catch(error) {
         console.log(error)
