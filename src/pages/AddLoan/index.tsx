@@ -4,9 +4,8 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {Checkbox, Divider, Grid, TextField, Typography, DialogContentText } from '@mui/material';
+import {Divider, Grid, TextField, Typography, DialogContentText } from '@mui/material';
 import { useOpenCard, useVet } from 'Store';
-//import { supabase } from 'data/database';
 
 
 export default function AddLoan() {
@@ -15,30 +14,24 @@ export default function AddLoan() {
   const open = useOpenCard((state) => (state.openCard))
   const [createLoan, useCreateLoan] = React.useState(false)
   const [credit, setCredit] = React.useState(false)
-  const [cardNumber, setCardNumber] = React.useState("0")
-  const [cvv, setCVV] = React.useState("0")
+  const [cardNumber, setCardNumber] = React.useState(0)
+  const [cvv, setCVV] = React.useState(0)
   const [exp, setExp] = React.useState("")
   const [fullname, setFullname] = React.useState("")
   const [email, setEmail] = React.useState("")
-  const [number, setNumber] = React.useState("0")
+  const [number, setNumber] = React.useState(0)
   const [addr, setAddr] = React.useState("")
-  const [loan, setLoan] = React.useState("0")
-  const [date, setDate] = React.useState("")
+  const [loan, setLoan] = React.useState(0)
+  const [typeofloan, setTypeOfLoan] = React.useState(false);
+  const [monthsToPay, setMonthsToPay] = React.useState(0);
+  const [installment, setInstallment] = React.useState(0);
+  const [bankStatement, setBankStatement] = React.useState("");
 
   //functions
   const handleClose  = () => {
     useCreateLoan(false)
     useOpenCard.setState({openCard: false})
   };
-/*
-  const handleSubmit = async () => {
-    try{
-    run fucntion for dpo group
-    end function
-
-      const {data, error} = await supabase.from('Borrowers').insert({''})
-    }
-  }*/
 
   //jsx
   const cardSection = <>
@@ -48,11 +41,11 @@ export default function AddLoan() {
     </Grid>
     <Grid item xs={12} md={8}>
         <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-        <TextField  color="primary" type='number' variant='outlined' label='Card Number' placeholder='eg. 547843943' size='small' value={cardNumber} onChange={(e) => {setCardNumber(e.target.value)}}/>
+        <TextField  color="primary" type='number' variant='outlined' label='Card Number' placeholder='eg. 547843943' size='small' value={cardNumber} onChange={(e) => {setCardNumber(Number(e.target.value))}}/>
     </Grid>
     <Grid item xs={12} md={4}>
         <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-        <TextField  color="primary" type='number' variant='outlined' label='CVV' placeholder='eg. 123' size='small' value={cvv} onChange={(e) => {setCVV(e.target.value)}} />
+        <TextField  color="primary" type='number' variant='outlined' label='CVV' placeholder='eg. 123' size='small' value={cvv} onChange={(e) => {setCVV(Number(e.target.value))}} />
     </Grid>
     <Grid item xs={12}> 
         <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
@@ -84,30 +77,13 @@ export default function AddLoan() {
 
     <Grid item xs={12}>
       <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-      <TextField color="primary" type='number' variant='outlined' label='Phone Number' placeholder='eg. 57502734' size='small' value={number} onChange={(e) => {setNumber(e.target.value)}} />
+      <TextField color="primary" type='number' variant='outlined' label='Phone Number' placeholder='eg. 57502734' size='small' value={number} onChange={(e) => {setNumber(Number(e.target.value))}} />
     </Grid>
 
     <Grid item xs={12}>
       <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
       <TextField  color="primary" type='text' variant='outlined' label='Physical Address' placeholder='eg. Maseru, Ha-Thetsane, Maseru 100' size='small' value={addr} onChange={(e) => {setAddr(e.target.value)}}/>
     </Grid>
-  {
-    /*<Grid item xs={12}>
-      <Divider>Next Of Kin Information <Typography variant='body2'>(optional)</Typography></Divider>
-    </Grid>
-
-    <Grid item xs={12}>
-      <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-      <TextField  color="primary" type='text' variant='outlined' label='Full Names' placeholder='eg. Maserati Mary Qothi' size='small' />
-    </Grid>
-
-    <Grid item xs={12}>
-      <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-      <TextField  color="primary" type='number' variant='outlined' label='Phone Number' placeholder='eg. 67583902' size='small' />
-    </Grid>
-    */
-  }
-    
 
     <Grid item xs={12}>
       <Divider>Loan And Bank Account Information</Divider>
@@ -115,22 +91,36 @@ export default function AddLoan() {
 
     <Grid item xs={12}>
       <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-      <TextField  color="primary" type='number' variant='outlined' label='Loan Amount' placeholder='eg. 100000' size='small' value={loan} onChange={(e) => {setLoan(e.target.value)}}/>
+      <TextField  color="primary" type='file' variant='outlined' label='Bank Statement' placeholder='eg. 2021-09-30' size='small' defaultValue={bankStatement} onChange={(e) => {setBankStatement(e.target.value)}}/>
+    </Grid>
+
+    <Grid item xs={12}>
+    <Typography variant='body2' color="primary" gutterBottom>Is this a long term loan? N.B takes more than 1 month to repay.</Typography>
+    <Button variant='contained' onClick={() => setTypeOfLoan(true)} > Yes </Button> 
+
+    <Grid item xs={12}>
+      {typeofloan ?
+      <>
+      <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
+      <TextField  color="primary" type='number' variant='outlined' label='Months to Pay' placeholder='eg. 12' size='small' value={monthsToPay} onChange={(e) => {setMonthsToPay(Number(e.target.value))}}/>
+      <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
+      <TextField  color="primary" type='number' variant='outlined' label='Monthly Installment' placeholder='eg. 1000' size='small' value={installment} onChange={(e) => {setInstallment(Number(e.target.value))}}/>
+      </> :
+      <>
+      <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
+      <TextField  color="primary" type='number' variant='outlined' label='Loan Amount' placeholder='eg. 100000' size='small' value={loan} onChange={(e) => {setLoan(Number(e.target.value))}}/>
+      </>}
+    </Grid>
     </Grid>
 
     <Grid item xs={12}>
       {credit ? cardSection : 
       <>
       <Typography variant='body2' color="primary" gutterBottom>Is the Borrower subject to automatic billing on due date?</Typography>
-      <Checkbox value={credit} onChange={(e) => setCredit(e.target.checked)}/>      
-      </>   }
+      <Button variant='contained' onClick={() => setCredit(true)}> Yes </Button> 
+      </> 
+      }
     </Grid>
-
-    <Grid item xs={12}>
-      <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-      <TextField  color="primary" type='date' variant='outlined' label=' Preferred Payment Date' size='small' value={date} onChange={(e) => {setDate(e.target.value)}}/>
-    </Grid>
-
   </Grid>
 
 </DialogContent>
