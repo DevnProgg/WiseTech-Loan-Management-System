@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import IconifyIcon from 'components/base/IconifyIcon';
-import Profile from 'assets/images/Profile.png';
+import Profile from 'assets/images/p.png';
 import paths from 'routes/paths';
 import { useNavigate } from 'react-router-dom';
 
