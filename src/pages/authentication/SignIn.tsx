@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
-import Logo from 'assets/FindWise.png';
+import Logo from 'assets/wise tech.png';
 import { supabase } from 'data/database';
 import { LenderInfo, useLender, useMessages, useSession} from 'Store';
 import { useNavigate } from 'react-router-dom';

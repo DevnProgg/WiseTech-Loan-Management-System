@@ -11,7 +11,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
 import sitemap from 'routes/sitemap';
-import Logo from 'assets/FindWise.png';
+import Logo from 'assets/wise tech bright.png';
 import { useLocation } from 'react-router-dom';
 import { Tooltip } from '@mui/material';
 
@@ -39,7 +39,7 @@ const DrawerItems = ({ expand }: DrawerItemsProps) => {
             alignItems="center"
             justifyContent="center"
           >
-            <Image src={Logo} alt="logo" height={44} width={44} />
+            <Image src={Logo} alt="logo" height={100} width={100} />
           </Stack>
         </ButtonBase>
       </Stack>
@@ -100,7 +100,7 @@ const DrawerItems = ({ expand }: DrawerItemsProps) => {
                       },
                   {
                     '& .MuiListItemText-primary': {
-                      color: item.path === location.pathname  ? 'primary.main' : 'text.disabled',
+                      color: item.path === location.pathname  ? 'primary.darker' : 'text.disabled',
                     },
                   },
                 ]}

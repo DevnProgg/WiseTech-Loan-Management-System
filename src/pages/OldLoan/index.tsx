@@ -12,7 +12,7 @@ import { supabase } from 'data/database';
 export default function OldLoan() {
   const open = useVet((state) => (state.isVet))
   const [borrower, setBorrower] = React.useState("");
-  const [loan, setLoan] = React.useState("0");
+  const [loan, setLoan] = React.useState(0);
   const [date, setDate] = React.useState("");
   const [borrowers, setBorrowers] = React.useState<{ label: string }[]>([])
   const id = useLender((state) => state.lender.id)
@@ -103,7 +103,7 @@ export default function OldLoan() {
 
     <Grid item xs={12}>
       <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-      <TextField color="primary" type='number' variant='outlined' label='Additional Loan Amount' size='small' value={loan} onChange={(e) => {setLoan(e.target.value)}} />
+      <TextField color="primary" type='number' variant='outlined' label='Additional Loan Amount' size='small' value={loan} onChange={(e) => {setLoan(Number(e.target.value))}} />
     </Grid>
 
     <Grid item xs={12}>

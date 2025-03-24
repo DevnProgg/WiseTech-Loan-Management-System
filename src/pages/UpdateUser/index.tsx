@@ -14,7 +14,7 @@ export default function Updateuser() {
   const open = useUpdateUser((state) => (state.isOpen))
   const [fullName, setFullName] = React.useState("")
   const [email, setEmail] = React.useState("")
-  const [number, setNumber] = React.useState("0")
+  const [number, setNumber] = React.useState(0)
   const [addr, setAddr] = React.useState("")
 
   //functions
@@ -53,7 +53,7 @@ export default function Updateuser() {
 
     <Grid item xs={12}>
       <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-      <TextField color="primary" type='number' variant='outlined' label='Phone Number' placeholder='eg. 57502734' size='small' value={number} onChange={(e) => {setNumber(e.target.value)}} />
+      <TextField color="primary" type='number' variant='outlined' label='Phone Number' placeholder='eg. 57502734' size='small' value={number} onChange={(e) => {setNumber(Number(e.target.value))}} />
     </Grid>
 
     <Grid item xs={12}>

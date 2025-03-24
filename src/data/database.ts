@@ -7,7 +7,7 @@ const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZi
 export const supabase = createClient(URL, key);
 
 /*
-const sql = "CREATE TABLE Lender (
+CREATE TABLE Lender (
     id SERIAL PRIMARY KEY,
     business_name VARCHAR(255) unique NOT NULL ,
     phone_number VARCHAR(20) UNIQUE NOT NULL,
@@ -67,4 +67,4 @@ select borrower.id, borrower.name, borrower.email_address, borrower.phone_number
 from loan 
 left join borrower
 on borrower.id = loan.borrower_id;
-"*/
+*/

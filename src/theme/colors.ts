@@ -3,6 +3,11 @@ export const white = {
   200: '#FAFAFB',
 };
 
+export const white2 = {
+  100: '#212226',
+  200: '#262626',
+};
+
 export const gray = {
   100: '#E0E5F2',
   500: '#A1A1AC',
@@ -10,6 +15,14 @@ export const gray = {
   700: '#555555',
   800: '#333333',
 };
+
+export const tsc = {
+  500: "#228684",
+  100: "#3fe1f0",
+  600: "#035f6a",
+  700: "#0a474a",
+  200: "#07cddc",
+}
 
 export const darkblue = {
   500: '#030229',
@@ -64,6 +77,10 @@ export const transparentWhite = {
   500: '#fafafa4d',
 };
 
+export const transparentWhite2 = {
+  500: '#212226',
+};
+
 export const transparentRed = {
   200: '#ff8f6b1a',
   500: '#d11a2a1a',
@@ -72,6 +89,10 @@ export const transparentRed = {
 export const transparentGreen = {
   500: '#3a974c1a',
 };
+
+export const transparentTsc = {
+  500 : "#58eeff"
+}
 
 export const transparentYellow = {
   500: '#ffd66b1a',

@@ -50,7 +50,7 @@ const BorrowersTable = () => {
     };
 
     fetchBorrowers();
-  }, [useDataChange((state) => state.borrowerChange)]);
+  }, [useDataChange((state) => state.loanChange)]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);

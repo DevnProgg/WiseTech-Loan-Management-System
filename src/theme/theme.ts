@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import type {} from '@mui/x-data-grid/themeAugmentation';
-import palette from './palette';
+import {palette} from './palette';
 import typography from './typography';
 import customShadows from './shadows';
 import Stack from './components/layout/Stack';
@@ -80,3 +80,4 @@ export const theme = createTheme({
     MuiCssBaseline: CssBaseline,
   },
 });
+

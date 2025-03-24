@@ -1,6 +1,6 @@
 import { PaletteColorOptions, PaletteOptions } from '@mui/material/styles';
 import {
-  white,
+  white2,
   gray,
   darkblue,
   blue,
@@ -10,7 +10,7 @@ import {
   yellow,
   transparentRed,
   transparentYellow,
-  transparentWhite,
+  transparentWhite2,
   transparentBlue,
   transparentCyan,
   transparentViolet,
@@ -61,77 +61,79 @@ declare module '@mui/material/styles' {
   }
 }
 
+
 export const palette: PaletteOptions = {
-  neutral: {
-    light: gray[100],
-    main: gray[500],
-    dark: gray[600],
-    darker: gray[700],
-  },
-  primary: {
-    lighter: tsc[100],
-    light: tsc[500],
-    main: tsc[600],
-  },
-  secondary: {
-    light: cyan[500],
-    main: blue[500],
-    dark: blue[800],
-  },
-  info: {
-    lighter: white[100],
-    main: white[200],
-    darker: darkblue[500],
-  },
-  success: {
-    main: tsc[500],
-  },
-  warning: {
-    main: yellow[500],
-  },
-  error: {
-    light: tomato[500],
-    main: red[500],
-    dark: red[800],
-  },
-  text: {
-    primary: tsc[700],
-    secondary: gray[800],
-    disabled: gray[500],
-  },
-  gradients: {
-    primary: {
-      main: tsc[100],
-      state: tsc[500],
+    neutral: {
+      light: gray[100],
+      main: gray[500],
+      dark: gray[600],
+      darker: gray[700],
     },
-    secondary: {
+    primary: {
+      lighter: tsc[100],
+      light: tsc[500],
       main: tsc[200],
-      state: tsc[100],
-    },
-  },
-  transparent: {
-    primary: {
-      main: transparentTsc[500],
-      dark: transparentViolet[700],
+      darker : tsc[700],
     },
     secondary: {
-      lighter: transparentBlue[300],
-      light: transparentCyan[500],
-      main: transparentBlue[500],
+      light: cyan[500],
+      main: blue[500],
+      dark: blue[800],
     },
     info: {
-      main: transparentWhite[500],
+      lighter: white2[100],
+      main: white2[200],
+      darker: darkblue[500],
     },
     success: {
-      main: transparentTsc[500],
+      main: tsc[500],
     },
     warning: {
-      main: transparentYellow[500],
-      dark: transparentYellow[700],
+      main: yellow[500],
     },
     error: {
-      light: transparentRed[200],
-      main: transparentRed[500],
+      light: tomato[500],
+      main: red[500],
+      dark: red[800],
     },
-  },
-};
+    text: {
+      primary: tsc[700],
+      secondary: gray[800],
+      disabled: gray[500],
+    },
+    gradients: {
+      primary: {
+        main: tsc[100],
+        state: tsc[500],
+      },
+      secondary: {
+        main: tsc[200],
+        state: tsc[100],
+      },
+    },
+    transparent: {
+      primary: {
+        main: transparentTsc[500],
+        dark: transparentViolet[700],
+      },
+      secondary: {
+        lighter: transparentBlue[300],
+        light: transparentCyan[500],
+        main: transparentBlue[500],
+      },
+      info: {
+        main: transparentWhite2[500],
+      },
+      success: {
+        main: transparentTsc[500],
+      },
+      warning: {
+        main: transparentYellow[500],
+        dark: transparentYellow[700],
+      },
+      error: {
+        light: transparentRed[200],
+        main: transparentRed[500],
+      },
+    },
+  };

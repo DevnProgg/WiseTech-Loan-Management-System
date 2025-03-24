@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
 import ProfileMenu from './ProfileMenu';
-import Logo from 'assets/FindWise.png';
+import Logo from 'assets/wise tech.png';
 import { useNavigate } from 'react-router-dom';
 import paths from 'routes/paths';
 import { Typography } from '@mui/material';
@@ -58,7 +58,7 @@ const Topbar = ({
             disableRipple
             sx={{ lineHeight: 0, display: { xs: 'none', sm: 'block', lg: 'none' } }}
           >
-            <Image src={Logo} alt="logo" height={40} width={40} />
+            <Image src={Logo} alt="logo" height={65} width={65} />
           </ButtonBase>
 
           <Toolbar>
@@ -89,7 +89,7 @@ const Topbar = ({
             </IconButton>
           </Toolbar>
           <Stack direction="row">
-          <Typography variant='h6' color="primary.dark" align='center'>Fund Wise<Typography variant="body2" color="info">Loan Management System</Typography></Typography>   
+          <Typography variant='h6' color="primary.dark" align='center'>Wise Tech<Typography variant="body2" color="info">Loan Management System</Typography></Typography>   
           </Stack>
          
         </Stack>
