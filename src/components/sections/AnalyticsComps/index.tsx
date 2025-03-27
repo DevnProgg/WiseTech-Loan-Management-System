@@ -1,19 +1,24 @@
-import React from "react";
-import DefaultRateChart from "./defaultChart";
-import { defaultRateData } from "data/defaultRate";
-import { Typography } from "@mui/material";
+import Stack from '@mui/material/Stack';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import DefaultsChart from './defaultChart'; 
 
-const App: React.FC = () => {
-//  const loanData = defaultRateData;
 
+const DefaultPayments = () => {
   return (
-    <div>
-      <Typography variant="h5" gutterBottom>
-        Loan Payment Rate Chart
-      </Typography>
-      <DefaultRateChart data={defaultRateData} />
-    </div>
+    <Paper sx={{ pr: 0, height: 410 }}>
+      <Stack mt={-0.5} pr={3.5} alignItems="center" justifyContent="space-between">
+        <Typography variant="h6" color="text.secondary">
+          Default Payments Report
+        </Typography>
+
+      </Stack>
+      <DefaultsChart
+        data={[0,0,0,0,0,0,0,0,0,0,0,0]}
+        sx={{ height: '320px !important' }}
+      />
+    </Paper>
   );
 };
 
-export default App;
+export default DefaultPayments;

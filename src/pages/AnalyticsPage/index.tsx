@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid';
-import App from 'components/sections/AnalyticsComps';
+import DefaultPayments from 'components/sections/AnalyticsComps';
 import Analytics from 'components/sections/dashboard/analytics';
 import Reports from 'components/sections/dashboard/reports';
 import TopLoans from 'components/sections/dashboard/top-loans';
@@ -18,7 +18,7 @@ const AnalyticsPage = () => {
         <TopLoans />
       </Grid>
       <Grid item xs={12} md={9}>
-        <App/>
+        <DefaultPayments />
       </Grid>
     </Grid>
   );

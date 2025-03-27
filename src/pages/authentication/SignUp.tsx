@@ -13,7 +13,7 @@ import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
-import Logo from 'assets/FindWise.png';
+import Logo from 'assets/wise tech bright.png';
 import paths from 'routes/paths';
 
 interface User {

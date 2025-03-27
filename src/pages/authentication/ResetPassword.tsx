@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import Image from 'components/base/Image';
-import Logo from 'assets/FindWise.png';
+import Logo from 'assets/wise tech bright.png';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
