@@ -13,9 +13,9 @@ export default {
   notification: `/${rootPaths.pageRoot}/notification`,
   settings: `/${rootPaths.pageRoot}/settings`,
   networkError: `/${rootPaths.pageRoot}/networkissue`,
+  locked : `/${rootPaths.authRoot}/locked`,
 
   signin: `/${rootPaths.authRoot}/signin`,
   signup: `/${rootPaths.authRoot}/signup`,
-  resetPassword: `/${rootPaths.authRoot}/reset-password`,
   404: `/${rootPaths.errorRoot}/404`,
 };

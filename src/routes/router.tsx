@@ -17,7 +17,7 @@ const Settings = lazy(()=> import('pages/Settings'));
 const InternetConnectivity = lazy(()=> import('pages/Offline'))
 const SignIn = lazy(() => import('pages/authentication/SignIn'));
 const SignUp = lazy(() => import('pages/authentication/SignUp'));
-const ResetPassword = lazy(() => import('pages/authentication/ResetPassword'));
+const Locked= lazy(() => import('pages/authentication/Locked'));
 const Error404 = lazy(() => import('pages/errors/Error404'));
 
 const routes = [
@@ -171,8 +171,8 @@ const routes = [
             ),
           },
           {
-            path: paths.resetPassword,
-            element: <ResetPassword />,
+            path: paths.locked,
+            element: <Locked />,
           },
         ],
       },
