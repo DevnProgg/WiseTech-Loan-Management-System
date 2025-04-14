@@ -1,21 +1,18 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import paths from 'routes/paths';
-import {Grid, LinearProgress, TextField, Typography } from '@mui/material';
-import { useLender, useMessages } from 'Store';
+import {Grid, LinearProgress, Stack, TextField, Typography } from '@mui/material';
 import { supabase } from 'data/database';
+import { useMessages } from 'Store/Error';
+import { useLender } from 'Store/Lender';
 
 
 export default function Settings() {
 
   //state
   const navigate = useNavigate();
-  const [open, setOpen] = React.useState(true);
   const [username, setUsername] = React.useState(useLender((state) => state.lender.username))
   const [password, setPassword] = React.useState(useLender((state) => state.lender.password))
   const [interest, setInterest] = React.useState(useLender((state) => state.lender.Interest_rate.toString()))
@@ -31,7 +28,6 @@ export default function Settings() {
   const handleClose = () => {
     if(!loading){
     navigate(paths.dashboard)
-    setOpen(false);
     }
   };
 
@@ -84,58 +80,68 @@ export default function Settings() {
     }
 
     navigate(paths.dashboard)
-    setOpen(false);
   }
  
   //jsx
   return (
     <React.Fragment>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="Account Settings"
-        aria-describedby="Settings"
-      >
-        <DialogTitle id="Account Settings" style={{marginBottom: '5%'}}>
-          {"Account Settings"}
-        </DialogTitle>
-        <DialogContent>
-          <Grid container px={3.75} spacing={3.75}>
-            <Grid item xs={12}>
+      <Grid container px={3.75} spacing={3.75}>
+        <Grid item xs={12} md={6}>
+            <Grid container px={3.75} spacing={3.75} >
+              <DialogTitle id="Account Settings" style={{width: "100%"}}>
+                {"Account Settings"}
+                {!loading ? <>
+                  <br />
+                  <Stack direction={"row"} spacing={3.75}>
+                    <Button variant='outlined' style={{color : "#0a474a"}} onClick={handleClose}>Exit</Button>
+                    <Button variant='contained' onClick={handleSave} autoFocus>
+                      Save & Exit
+                    </Button>
+                  </Stack>
+                </> :
+                <LinearProgress />}
+              </DialogTitle>
+              <Grid item xs={12}>
+                <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
+                <TextField color="primary" type='text'variant='outlined' label='Username' size='small' value={username} onChange={(e)=> {handleUsername(e.target.value)}} fullWidth/>
+              </Grid>
+              <Grid item xs={12}>
               <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-              <TextField color="primary" type='text'variant='outlined' label='Username' size='small' value={username} onChange={(e)=> {handleUsername(e.target.value)}} />
-            </Grid>
-            <Grid item xs={12}>
-            <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-            <TextField color="primary" type='text' variant='outlined' label='Password' size='small' value={password} onChange={(e) => {handlePassword(e.target.value)}}/>
-            </Grid>
-            <Grid item xs={12}>
-            <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-            <TextField color="primary" type='number' variant='outlined' label='Interest Rate (%)' size='small' value={interest} onChange={(e) => {handleInterest(e.target.value)}} />
-            </Grid>
-            <Grid item xs={12}>
+              <TextField color="primary" type='text' variant='outlined' label='Password' size='small'  value={password} onChange={(e) => {handlePassword(e.target.value)}}fullWidth/>
+              </Grid>
+              <Grid item xs={12}>
               <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-              <TextField color="primary" type='text' variant='outlined' label='Phone Number' value={phone_number} size='small' onChange={(e) => {handleNumber(e.target.value)}} />
+              <TextField color="primary" type='number' variant='outlined' label='Interest Rate (%)'  size='small' value={interest} onChange={(e) => {handleInterest(e.target.value)}} fullWidth/>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
+                <TextField color="primary" type='text' variant='outlined' label='Phone Number' value={phone_number}  size='small' onChange={(e) => {handleNumber(e.target.value)}} fullWidth/>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
+                <TextField color="primary" type='email' variant='outlined' label='Email Address' value={email}  size='small' onChange={(e) => {handleEmail(e.target.value)}} fullWidth/>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
+                <TextField color="primary" type='text' variant='outlined' label='Business Name' value={business} size='small'  onChange={(e) => {handleBusiness(e.target.value)}} fullWidth/>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-              <TextField color="primary" type='email' variant='outlined' label='Email Address' value={email} size='small' onChange={(e) => {handleEmail(e.target.value)}} />
             </Grid>
-            <Grid item xs={12}>
-              <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-              <TextField color="primary" type='text' variant='outlined' label='Business Name' value={business} size='small' onChange={(e) => {handleBusiness(e.target.value)}} />
+            <Grid item xs={12} md={6}>
+              <Grid container px={3.75} spacing={3.75}>
+                <DialogTitle id="Account Settings" style={{width: "100%"}}>
+                  {"Loan Settings"}
+                  {<>
+                  <br />
+                  <Stack direction={"row"} spacing={3.75}>
+                    <Button variant='contained'> Add New Field </Button>
+                  </Stack>
+                  </>}
+                </DialogTitle>
+                
+                </Grid>
             </Grid>
           </Grid>
-
-        </DialogContent>
-          {!loading ? <DialogActions>
-          <Button color='primary' onClick={handleClose}>Exit</Button>
-          <Button onClick={handleSave} autoFocus>
-            Save & Exit
-          </Button>
-        </DialogActions> :
-        <LinearProgress />}
-      </Dialog>
     </React.Fragment>
   );
 }

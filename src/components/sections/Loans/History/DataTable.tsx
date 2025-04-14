@@ -5,7 +5,8 @@ import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
 import { formatNumber } from 'helpers/formatNumber';
 import { Button } from '@mui/material';
-import { useUpdateUser, useLoanData} from 'Store';
+import { useUpdateUser} from 'Store/Store';
+import { useLoanData } from 'Store/Loan';
 
 const handleClicker = () => {
   useUpdateUser.setState({isOpen: true}); 

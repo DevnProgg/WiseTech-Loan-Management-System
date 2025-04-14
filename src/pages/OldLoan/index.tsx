@@ -5,8 +5,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Divider, Grid, TextField, Typography, Autocomplete, LinearProgress, Alert } from '@mui/material';
-import { useDataChange, useLender, useMessages, useOpenCard, useVet } from 'Store';
+import { useOpenCard} from 'Store/Store';
 import { supabase } from 'data/database';
+import { useVet } from 'Store/Borrower';
+import { useDataChange } from 'Store/DataChange';
+import { useMessages } from 'Store/Error';
+import { useLender } from 'Store/Lender';
 
 
 export default function OldLoan() {

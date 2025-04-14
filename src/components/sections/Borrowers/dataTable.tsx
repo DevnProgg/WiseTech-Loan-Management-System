@@ -3,8 +3,9 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
-import { useBorrowerData, useUpdateUser } from 'Store';
+import { useUpdateUser } from 'Store/Store';
 import { Button } from '@mui/material';
+import { useBorrowerData } from 'Store/Borrower';
 
 const handleClicker = () => {
   useUpdateUser.setState({isOpen: true});

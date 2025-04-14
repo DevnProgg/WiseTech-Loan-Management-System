@@ -7,9 +7,11 @@ import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconifyIcon from 'components/base/IconifyIcon';
 import DataTable from '../../Loans/History/DataTable';
-
-import { LoanData, useDataChange, useLender, useLoanData, useMessages } from 'Store';
 import { supabase } from 'data/database';
+import { useDataChange } from 'Store/DataChange';
+import { useMessages } from 'Store/Error';
+import { useLender } from 'Store/Lender';
+import { useLoanData, LoanData } from 'Store/Loan';
 
 const History = () => {
   const id = useLender((state) => state.lender.id);

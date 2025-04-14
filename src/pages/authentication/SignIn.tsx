@@ -13,10 +13,12 @@ import IconifyIcon from 'components/base/IconifyIcon';
 import Image from 'components/base/Image';
 import Logo from 'assets/wise tech.png';
 import { supabase } from 'data/database';
-import { LenderInfo, useLender, useMessages, useSession} from 'Store';
+import { useSession} from 'Store/Store';
 import { useNavigate } from 'react-router-dom';
 import paths from 'routes/paths';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useMessages } from 'Store/Error';
+import { useLender, LenderInfo } from 'Store/Lender';
 
 interface User {
   [key: string]: string;

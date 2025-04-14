@@ -9,7 +9,7 @@ import AddLoan from 'pages/AddLoan';
 import Updateuser from 'pages/UpdateUser';
 import { useNavigate } from 'react-router-dom';
 import paths from 'routes/paths';
-import { useSession } from 'Store';
+import { useSession } from 'Store/Store';
 import OldLoan from 'pages/OldLoan';
 import Cookie from 'components/base/Cookie';
 

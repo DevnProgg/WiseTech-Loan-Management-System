@@ -5,7 +5,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {Divider, Grid, TextField, Typography, DialogContentText } from '@mui/material';
-import { useOpenCard, useVet } from 'Store';
+import { useOpenCard } from 'Store/Store';
+import { useVet } from 'Store/Borrower';
 
 
 export default function AddLoan() {

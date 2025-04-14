@@ -1,7 +1,8 @@
 import { Alert, AlertTitle } from "@mui/material";
 import { supabase } from "data/database";
 import { useEffect } from "react";
-import { useMessages, useNotifications } from "Store";
+import { useMessages } from "Store/Error";
+import { useNotifications } from "Store/Notification";
 
 
 const Notifications = () => {

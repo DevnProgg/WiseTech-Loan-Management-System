@@ -3,7 +3,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import IconifyIcon from 'components/base/IconifyIcon';
 import { TopCard as TopCardDataProps } from 'data/topCardsData';
-import { useOpenCard } from 'Store';
+import { useOpenCard } from 'Store/Store';
 
 interface TopCardProps {
   data: TopCardDataProps;

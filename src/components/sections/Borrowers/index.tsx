@@ -6,8 +6,11 @@ import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconifyIcon from 'components/base/IconifyIcon';
 import DataTable from './dataTable';
-import { BorrowerData, useBorrowerData, useDataChange, useLender, useMessages } from 'Store';
 import { supabase } from 'data/database';
+import { useLender } from 'Store/Lender';
+import { useBorrowerData, BorrowerData } from 'Store/Borrower';
+import { useDataChange } from 'Store/DataChange';
+import { useMessages } from 'Store/Error';
 
 const BorrowersTable = () => {
   const [searchText, setSearchText] = useState('');

@@ -2,7 +2,7 @@ import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
-import { LoanData } from 'Store';
+import { LoanData } from 'Store/Loan';
 
 interface LoanCardProps {
   data: LoanData;

@@ -5,8 +5,8 @@ import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import LoanCard from './LoanCard';
-import { useLoanData } from 'Store';
 import { CircularProgress } from '@mui/material';
+import { useLoanData } from 'Store/Loan';
 
 const TopLoans = () => {
   const topProductsData = useLoanData((state) => state.loans)

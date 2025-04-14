@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Alert } from "@mui/material";
-import { useMessages } from "Store";
+import { useMessages } from 'Store/Error';
 
 function Cookie() {
   const cookies = useMessages((state) => state.messages);

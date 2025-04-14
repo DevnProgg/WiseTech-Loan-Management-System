@@ -1,5 +1,5 @@
 import { Fab } from "@mui/material";
-import { useOpenCard } from "Store";
+import { useOpenCard } from "Store/Store";
 
 interface FabStyle {
     position: 'fixed';
