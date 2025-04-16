@@ -28,3 +28,11 @@ export const useSession = create <Session> (() => ({
     isLogged : true
 }))
 //end of login state
+
+type FieldSettings = {
+    isOpen : boolean;
+}
+
+export const useFieldSettings = create <FieldSettings> (() => ({
+    isOpen : true
+}))
