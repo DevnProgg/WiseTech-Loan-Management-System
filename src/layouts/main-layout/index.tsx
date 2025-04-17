@@ -13,6 +13,7 @@ import { useSession } from 'Store/Store';
 import OldLoan from 'pages/OldLoan';
 import Cookie from 'components/base/Cookie';
 import { AddFields } from 'pages/AddFields';
+import PersonalData from 'pages/AddPersonalData';
 
 interface FabStyle {
   position: 'fixed';
@@ -60,6 +61,7 @@ const MainLayout = ({ children }: React.PropsWithChildren) => {
       miniDrawerWidth={miniDrawerWidth}
     />
     <Box mt={12}>{children}
+    <PersonalData />
     <AddFields />
       <AddLoan />
       <Updateuser />

@@ -34,5 +34,13 @@ type FieldSettings = {
 }
 
 export const useFieldSettings = create <FieldSettings> (() => ({
-    isOpen : true
+    isOpen : false
+}))
+
+type PersonalData = {
+    isOpen : boolean;
+}
+
+export const usePersonalData = create <PersonalData> (() => ({
+    isOpen : false
 }))
