@@ -17,7 +17,7 @@ export default function OldLoan() {
   const open = useVet((state) => (state.isVet))
   const [borrower, setBorrower] = React.useState("");
   const [loan, setLoan] = React.useState(0);
-  const [date, setDate] = React.useState("");
+  const [months, setMonths] = React.useState("");
   const [borrowers, setBorrowers] = React.useState<{ label: string }[]>([])
   const id = useLender((state) => state.lender.id)
   const {setLoanChange} = useDataChange()
@@ -34,28 +34,6 @@ export default function OldLoan() {
 
   const handleSubmit = async () => {
     try {
-      const {data, error} = await supabase.from('getborrowers').select("id").eq('name', borrower)
-
-      if(error) {
-        throw error
-      }
-
-      if(data) {
-        const borrower_id : string = data[0]?.id
-        const {data: loanData, error: loanError} = await supabase.from('loan').insert({
-          'id' : id,
-          'borrower_id' : borrower_id, 
-          'amount': loan, 
-          'start_payment_date' : date, })
-
-        if(loanError) {
-          throw loanError
-        }
-
-        if(loanData) {
-          console.log(loanData)
-        }
-      }
 
       setLoanChange()
       addMessage({message: "Loan Added Successfully", serverity : "success"})
@@ -112,7 +90,7 @@ export default function OldLoan() {
 
     <Grid item xs={12}>
       <Typography variant='h6' gutterBottom style={{color: "white"}}>.</Typography>
-      <TextField color='primary' type='date' variant='outlined' label='Loan Date' size='small' value={date} onChange={(e) => {setDate(e.target.value)}}/>
+      <TextField color='primary' type='number' variant='outlined' label='Months Payable' size='small' value={months} onChange={(e) => {setMonths(e.target.value)}}/>
     </Grid>
 
   </Grid>

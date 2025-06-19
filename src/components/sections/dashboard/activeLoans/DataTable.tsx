@@ -5,11 +5,11 @@ import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
 import { formatNumber } from 'helpers/formatNumber';
 import { Button } from '@mui/material';
-import { useUpdateUser} from 'Store/Store';
-import { useLoanData } from 'Store/Loan';
+import { useUpdateUserActions} from 'Store/Store';
+import { BorrowerData } from 'Store/Borrower';
 
 const handleClicker = () => {
-  useUpdateUser.setState({isOpen: true}); 
+  useUpdateUserActions.setState({isOpen: true}); 
 }
 interface TaskOverviewTableProps {
   searchText: string;
@@ -17,7 +17,7 @@ interface TaskOverviewTableProps {
 
 const DataTable = ({ searchText }: TaskOverviewTableProps) => {
   const apiRef = useGridApiRef<GridApi>();
-  const rows = useLoanData((state) => state.loans);
+  const rows = [] as BorrowerData[];
 
   useEffect(() => {
     apiRef.current.setQuickFilterValues(searchText.split(/\b\W+\b/).filter((word) => word !== ''));
@@ -33,7 +33,7 @@ const DataTable = ({ searchText }: TaskOverviewTableProps) => {
       minWidth: 120,
     },
     {
-      field: 'borrowerName',
+      field: 'borrower_name',
       headerName: 'Borrower Name',
       editable: false,
       align: 'left',
@@ -46,7 +46,7 @@ const DataTable = ({ searchText }: TaskOverviewTableProps) => {
         return (
           <Stack height={1} spacing={1.5} alignItems="center" justifyContent="flex-start">
             <Typography variant="caption" fontWeight={600}>
-              {params.row.borrowerName}
+              {params.row.borrower_name}
             </Typography>
           </Stack>
         );

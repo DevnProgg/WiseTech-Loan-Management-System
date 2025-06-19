@@ -4,16 +4,15 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {Divider, Grid, TextField, Typography, DialogContentText } from '@mui/material';
-import { useOpenCard } from 'Store/Store';
-import { useVet } from 'Store/Borrower';
+import {Divider, Grid, TextField, Typography } from '@mui/material';
+import { useOpenCard, useOpenVet } from 'Store/Store';
+
 
 
 export default function AddLoan() {
 
   //state
   const open = useOpenCard((state) => (state.openCard))
-  const [createLoan, useCreateLoan] = React.useState(false)
   const [loan, setLoan] = React.useState(0)
   const [typeofloan, setTypeOfLoan] = React.useState(false);
   const [monthsToPay, setMonthsToPay] = React.useState(0);
@@ -22,14 +21,19 @@ export default function AddLoan() {
 
   //functions
   const handleClose  = () => {
-    useCreateLoan(false)
+    useOpenVet.setState({isOpen:false})
     useOpenCard.setState({openCard: false})
   };
 
-  //jsx
-
-  const dialogPhase2 = <>
-  <DialogTitle id="Add Loan" style={{marginBottom: '5%', textAlign: "center"}}>
+  return (
+    <React.Fragment>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="Add Loan"
+        aria-describedby="Add Loan"
+      >
+        <DialogTitle id="Add Loan" style={{marginBottom: '5%', textAlign: "center"}}>
   {"Add New Loan"}
 </DialogTitle>
 <DialogContent>
@@ -69,31 +73,6 @@ export default function AddLoan() {
     Add Loan
   </Button>
 </DialogActions>
-</>
-
-  const dialogPhase1 =  <>
-<DialogContentText>Is this a new Borrower?</DialogContentText>
-<DialogActions>
-  <Button variant="text" onClick={()=>{
-    useVet.setState({isVet: true})
-  }}> No </Button>
-  <Button variant="contained" color="primary"  onClick={() => {useCreateLoan(true)}}> Yes </Button>
-</DialogActions>
-</>
-
-  return (
-    <React.Fragment>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="Add Loan"
-        aria-describedby="Add Loan"
-      >
-        { createLoan ? 
-        dialogPhase2
-        :
-        dialogPhase1
-}
       </Dialog>
     </React.Fragment>
   );

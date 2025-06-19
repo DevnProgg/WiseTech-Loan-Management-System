@@ -3,12 +3,12 @@ import {create} from "zustand"
 //state managing loan data
 
 export interface LoanData {
-    id: string;
-    borrowerName: string;
-    owing: number;
-    status: string;
-    type: string;
-    monthstorepay: number;
+    loan_id: string;
+    amount : number;
+    loan_status : string;
+    start_payment_date : number;
+    duration : number;
+    borrowe_id : string;
 }
 
 interface LoanDataState {

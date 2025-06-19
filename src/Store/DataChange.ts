@@ -18,4 +18,3 @@ export const useDataChange = create<DataChange> ((set) => ({
     setBorrowerChange : () => set((state) => ({borrowerChange : state.borrowerChange + 1})),
     setNotificationChange : () => set((state) => ({notificationChange : state.notificationChange + 1}))
 }))
- 

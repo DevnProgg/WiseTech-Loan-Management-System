@@ -1,12 +1,15 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useFieldStore } from "Store/Fields";
-import { usePersonalData } from "Store/Store";
+import { useOpenCard, usePersonalData } from "Store/Store";
 
 
 export default function PersonalData () {
 
     const open = usePersonalData((state) => (state.isOpen))
+    const [fullNames, setFullNames] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("")
+    const [email, setEmail] = useState("")
 
     const handleClose = () => {
         usePersonalData.setState({isOpen: false});
@@ -29,6 +32,13 @@ export default function PersonalData () {
         values.x[index].value = e.target.value;
     };
 
+    const handleNext = () => {
+        // Handle the next step logic here
+        console.log(values.x); // You can use the values as needed
+        handleClose(); // Close the dialog after handling the next 
+        useOpenCard.setState({openCard: true}) // Open the next dialog or perform any other action
+    }
+
     return (
         <React.Fragment>
           <Dialog
@@ -38,12 +48,24 @@ export default function PersonalData () {
             aria-describedby="Add Personal Data"
           >
             <DialogTitle id="Add Loan" style={{marginBottom: '5%', textAlign: "center"}}>
-                      {"Add New Loan"}
+                {"Add New Loan"}
             </DialogTitle>
             <DialogContent>
               <Grid container px={3.75} spacing={3.75}>
               <Grid item xs={12}>
                 <Divider>Personal Information</Divider>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2" gutterBottom style={{color : "white"}}>.</Typography>
+                <TextField variant="outlined" label="Full Names" type="text" value={fullNames} onChange={(e) => {setFullNames(e.target.value)}} color="primary" size="small" />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2" gutterBottom style={{color : "white"}}>.</Typography>
+                <TextField variant="outlined" label="Phone Number" type="number" value={phoneNumber} onChange={(e) => {setPhoneNumber(e.target.value)}} color="primary" size="small" />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2" gutterBottom style={{color: 'white'}} >.</Typography>
+                <TextField variant="outlined" label="Email Address" type="email" value={email} onChange={(e) => {setEmail(e.target.value)}} color="primary" size="small" />
               </Grid>
               {
                 fields.map((field, index) => {
@@ -58,8 +80,8 @@ export default function PersonalData () {
               </Grid>
             </DialogContent>
             <DialogActions>
-              <Button color="primary" variant="outlined" style={{color: "grey-text"}} onClick={handleClose} >Cancel</Button>
-              <Button color="primary" variant="contained">Next</Button>
+              <Button color="primary" variant="outlined" style={{color: "grey"}} onClick={handleClose} >Cancel</Button>
+              <Button color="primary" variant="contained" onClick={handleNext}>Next</Button>
             </DialogActions>
           </Dialog>
         </React.Fragment>

@@ -14,6 +14,8 @@ import OldLoan from 'pages/OldLoan';
 import Cookie from 'components/base/Cookie';
 import { AddFields } from 'pages/AddFields';
 import PersonalData from 'pages/AddPersonalData';
+import Vet from 'pages/LoanVet';
+import Login from 'pages/Login';
 
 interface FabStyle {
   position: 'fixed';
@@ -61,12 +63,14 @@ const MainLayout = ({ children }: React.PropsWithChildren) => {
       miniDrawerWidth={miniDrawerWidth}
     />
     <Box mt={12}>{children}
+      <Vet />
     <PersonalData />
     <AddFields />
       <AddLoan />
       <Updateuser />
       <OldLoan />
       <Cookie />
+      <Login />
     <FAB styles={fabStyle} />
     </Box>
     <Footer />

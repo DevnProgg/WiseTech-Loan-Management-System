@@ -4,7 +4,10 @@ type UpdateUser = {
     isOpen : boolean;
 }
 
-export const useUpdateUser = create<UpdateUser>(() => ({
+/*
+this state manages the opening and closing of the modal in @File : // update User
+*/
+export const useUpdateUserActions = create<UpdateUser>(() => ({
     isOpen : false
 }))
 
@@ -42,5 +45,21 @@ type PersonalData = {
 }
 
 export const usePersonalData = create <PersonalData> (() => ({
+    isOpen : false
+}))
+
+type OpenVet = {
+    isOpen : boolean
+}
+
+export const useOpenVet = create <OpenVet> (() =>({
+    isOpen :false
+}))
+
+type OpenLogin = {
+    isOpen : boolean
+}
+
+export const useOpenLogin = create <OpenLogin> (() => ({
     isOpen : false
 }))

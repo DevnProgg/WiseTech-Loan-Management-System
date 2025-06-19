@@ -5,11 +5,11 @@ import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
 import { formatNumber } from 'helpers/formatNumber';
 import { Button } from '@mui/material';
-import { useUpdateUser} from 'Store/Store';
+import { useUpdateUserActions} from 'Store/Store';
 import { useLoanData } from 'Store/Loan';
 
 const handleClicker = () => {
-  useUpdateUser.setState({isOpen: true}); 
+  useUpdateUserActions.setState({isOpen: true}); 
 }
 interface TaskOverviewTableProps {
   searchText: string;
@@ -46,7 +46,7 @@ const DataTable = ({ searchText }: TaskOverviewTableProps) => {
         return (
           <Stack height={1} spacing={1.5} alignItems="center" justifyContent="flex-start">
             <Typography variant="caption" fontWeight={600}>
-              {params.row.borrowerName}
+              {params.row.borrowe_id}
             </Typography>
           </Stack>
         );

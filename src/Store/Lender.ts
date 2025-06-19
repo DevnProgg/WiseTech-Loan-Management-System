@@ -5,11 +5,9 @@ import {create} from "zustand"
 export type LenderInfo = {
     id: string;
 	business_name : string;
-	phone_number : string;
+	phone_number : number;
 	email_address : string;
 	Interest_rate : number;
-	username : string;
-	password : string;
 }
 
 interface LenderInfoState {
@@ -21,11 +19,9 @@ export const useLender = create <LenderInfoState> ((set) => ({
     lender : {
         id : "",
         business_name : "",
-        phone_number : "",
+        phone_number : 0,
         email_address : "",
-        Interest_rate : 0,
-        username : "",
-        password : "",
+        Interest_rate : 0
     },
     setLender : (lender) => set({lender : lender}),
     

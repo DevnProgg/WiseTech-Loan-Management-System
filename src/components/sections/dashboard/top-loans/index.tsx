@@ -22,7 +22,7 @@ const TopLoans = () => {
       {
         topProductsData.length != 0 ? <Box mt={3}>
         {topProductsData.slice(0, 2).map((item, index) => (
-          <React.Fragment key={item.id}>
+          <React.Fragment key={item.borrowe_id}>
             <LoanCard data={item} />
             {index !== 1 && <Divider  />}
           </React.Fragment>

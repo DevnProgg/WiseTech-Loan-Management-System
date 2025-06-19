@@ -3,12 +3,12 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
-import { useUpdateUser } from 'Store/Store';
+import { useUpdateUserActions } from 'Store/Store';
 import { Button } from '@mui/material';
 import { useBorrowerData } from 'Store/Borrower';
 
 const handleClicker = () => {
-  useUpdateUser.setState({isOpen: true});
+  useUpdateUserActions.setState({isOpen: true});
 }
 
 interface TaskOverviewTableProps {
@@ -42,7 +42,7 @@ const DataTable = ({ searchText }: TaskOverviewTableProps) => {
         return (
           <Stack height={1} spacing={1.5} alignItems="center" justifyContent="flex-start">
             <Typography variant="caption" fontWeight={600}>
-              {params.row.borrowerName}
+              {params.row.borrower_name}
             </Typography>
           </Stack>
         );
@@ -50,7 +50,7 @@ const DataTable = ({ searchText }: TaskOverviewTableProps) => {
       sortComparator: (v1, v2) => v1.localeCompare(v2),
     },
     {
-      field: 'phonenumber',
+      field: 'phone_number',
       headerName: 'Phone Number',
       editable: false,
       align: 'left',
@@ -58,24 +58,8 @@ const DataTable = ({ searchText }: TaskOverviewTableProps) => {
       minWidth: 140,
     },
     {
-      field: 'email',
+      field: 'email_address',
       headerName: 'Email Address',
-      editable: false,
-      align: 'left',
-      flex: 2,
-      minWidth: 140,
-    },
-    {
-      field: 'address',
-      headerName: 'Address',
-      editable: false,
-      align: 'left',
-      flex: 2,
-      minWidth: 140,
-    },
-    {
-      field: 'Status',
-      headerName: 'Status',
       editable: false,
       align: 'left',
       flex: 2,

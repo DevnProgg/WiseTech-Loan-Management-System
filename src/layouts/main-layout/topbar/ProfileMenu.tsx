@@ -99,7 +99,15 @@ const ProfileMenu = () => {
         <Box p={1}>
           {menuItems.map((item) => {
             return (
-              <MenuItem key={item.id} onClick={() => {handleProfileMenuClose(); navigate(item.path);}} sx={{ py: 1 }}>
+              <MenuItem key={item.id} onClick={() => {
+                                                        handleProfileMenuClose(); 
+                                                        if (item.id != 6){
+                                                          navigate(item.path);
+                                                          return;
+                                                        }
+                                                        /*Delete all data*/
+                                                        return;
+                                                      }} sx={{ py: 1 }}>
                 <ListItemIcon sx={{ mr: 1, color: 'text.secondary', fontSize: 'h5.fontSize' }}>
                   <IconifyIcon icon={item.icon} />
                 </ListItemIcon>

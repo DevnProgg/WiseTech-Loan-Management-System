@@ -21,7 +21,7 @@ export const useMessages = create<MessageState> ((set) => ({
     deleteMessage : (index) => set((state) => ({messages : state.messages.filter((_, i) => i !== index)})),
     deleteOldMessages: () => set((state) => ({
         messages: state.messages.filter((message) => Date.now() - message.timestamp < 6000) // 1 minute
-      })),
+    })),
 }))
 
 //end of error and success messages

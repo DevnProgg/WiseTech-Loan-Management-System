@@ -14,11 +14,10 @@ export const useVet = create <vetBorrower> (() => ({
 //state managing borrower data
 
 export interface BorrowerData {
-    id : string;
-    borrowerName : string;
-    phonenumber : string;
-    email : string;
-    Status : string;
+    borrower_id : string;
+    borrower_name : string;
+    phone_number : number;
+    email_address : string;
 }
 
 interface BorrowerDataState {

@@ -22,7 +22,7 @@ const LoanCard = ({ data }: LoanCardProps) => {
               display="block"
               mb={0.75}
             >
-              {data.borrowerName}
+              {data.borrowe_id}
             </Typography>
             <Typography
               variant="body1"
@@ -31,7 +31,7 @@ const LoanCard = ({ data }: LoanCardProps) => {
               display="block"
               mt={0.5}
             >
-              {data.owing}
+              {data.amount}
             </Typography>
           </div>
         </Stack>
