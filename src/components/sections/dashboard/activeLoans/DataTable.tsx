@@ -6,7 +6,7 @@ import DataGridFooter from 'components/common/DataGridFooter';
 import { formatNumber } from 'helpers/formatNumber';
 import { Button } from '@mui/material';
 import { useUpdateUserActions} from 'Store/Store';
-import { BorrowerData } from 'Store/Borrower';
+import { useLoanData } from 'Store/Loan';
 
 const handleClicker = () => {
   useUpdateUserActions.setState({isOpen: true}); 
@@ -17,7 +17,7 @@ interface TaskOverviewTableProps {
 
 const DataTable = ({ searchText }: TaskOverviewTableProps) => {
   const apiRef = useGridApiRef<GridApi>();
-  const rows = [] as BorrowerData[];
+  const rows = useLoanData((state) => state.loans);
 
   useEffect(() => {
     apiRef.current.setQuickFilterValues(searchText.split(/\b\W+\b/).filter((word) => word !== ''));
@@ -54,8 +54,8 @@ const DataTable = ({ searchText }: TaskOverviewTableProps) => {
       sortComparator: (v1, v2) => v1.localeCompare(v2),
     },
     {
-      field: 'owing',
-      headerName: 'Owing',
+      field: 'amount',
+      headerName: 'Loan Amount',
       headerAlign: 'left',
       editable: false,
       flex: 1,
@@ -71,7 +71,7 @@ const DataTable = ({ searchText }: TaskOverviewTableProps) => {
       ),
     },
     {
-      field: 'Status',
+      field: 'loan_status',
       headerName: 'Status',
       editable: false,
       align: 'left',

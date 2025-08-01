@@ -29,7 +29,7 @@ const DataTable = ({ searchText }: TaskOverviewTableProps) => {
       minWidth: 120,
     },
     {
-      field: 'borrowerName',
+      field: 'borrower_name',
       headerName: 'Borrower Name',
       editable: false,
       align: 'left',
@@ -105,7 +105,7 @@ const DataTable = ({ searchText }: TaskOverviewTableProps) => {
       disableColumnSelector
       disableRowSelectionOnClick
       initialState={{
-        pagination: { paginationModel: { pageSize: 4 } },
+        pagination: { paginationModel: { pageSize: 10 } },
       }}
       autosizeOptions={{
         includeOutliers: true,
@@ -116,7 +116,7 @@ const DataTable = ({ searchText }: TaskOverviewTableProps) => {
       slots={{
         pagination: DataGridFooter,
       }}
-      pageSizeOptions={[4]}
+      pageSizeOptions={[10]}
     />
   );
 };

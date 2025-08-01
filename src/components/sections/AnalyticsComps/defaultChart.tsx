@@ -131,8 +131,8 @@ const DefaultsChart = ({ data, ...rest }: ClientChartProps) => {
       },
       yAxis: {
         type: 'value',
-        interval: 20000,
-        max: 100000,
+        interval: 10,
+        max: 100,
         splitLine: {
           show: true,
           lineStyle: {

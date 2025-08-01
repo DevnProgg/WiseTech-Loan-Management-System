@@ -9,7 +9,7 @@ import IconifyIcon from 'components/base/IconifyIcon';
 import DataTable from '../../Loans/History/DataTable';
 
 const History = () => {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('Paid');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);

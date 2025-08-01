@@ -1,6 +1,9 @@
 import { Theme, CSSObject } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import DrawerItems from './DrawerItems';
+import Stack from '@mui/material/Stack';
+import { Button } from '@mui/material';
+import { useOpenLogin } from 'Store/Store';
 
 interface SidebarProps {
   expand: boolean;
@@ -69,6 +72,9 @@ const Sidebar = ({
         ]}
       >
         <DrawerItems expand={expand} />
+        <Stack sx={{padding : "5%"}}>
+          <Button onClick={()=>{useOpenLogin.setState({isOpen : true})}} variant='contained' fullWidth sx={{height : '120%', fontWeight : "bold", fontSize : "120%"}}>Login</Button>
+        </Stack>
       </Drawer>
     </>
   );

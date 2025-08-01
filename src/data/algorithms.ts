@@ -4,9 +4,7 @@ import { useMessages } from "Store/Error";
 import { useLoanData, LoanData } from "Store/Loan";
 import { useNotifications } from "Store/Notification";
 import { LenderInfo, useLender } from "Store/Lender";
-import { useNavigate } from "react-router-dom";
-import { useSession } from "Store/Store";
-import paths from "routes/paths";
+import { useOpenLogin} from "Store/Store";
 
 const ValidationSet = {
     isset (StringVar : string) {
@@ -26,7 +24,7 @@ export const RetrieveData = {
             if (!ValidationSet.isset(ID)){
                 throw new Error("Please Login");
             }
-            const { data, error } = await supabase.from("getborrowers").select("id, name, phone_number, email_address, status").eq("id", ID);
+            const { data, error } = await supabase.from("lender_borrower").select("id, borrower_name, phone_number, email_address").eq("id", ID);
         
             if (error) {
                 throw error;
@@ -34,16 +32,14 @@ export const RetrieveData = {
         
             const borrowers: BorrowerData[] = data.map((Borrower: {
                 id: string;
-                name: string;
-                phone_number: string;
+                borrower_name: string;
+                phone_number: number;
                 email_address: string;
-                status: string;
             }) => ({
                 id: Borrower.id,
-                borrowerName: Borrower.name,
-                phonenumber: Borrower.phone_number,
-                email: Borrower.email_address,
-                Status: Borrower.status
+                borrower_name: Borrower.borrower_name,
+                phone_number: Borrower.phone_number,
+                email_address: Borrower.email_address,
             }));
         
             setBorrowers(borrowers);
@@ -64,7 +60,7 @@ export const RetrieveData = {
             if (!ValidationSet.isset(ID)){
                 throw new Error("Please Login");
             }
-            const { data, error } = await supabase.from("getloans").select("id, name, amount, status, type, monthstorepay").eq("lender_id", ID);
+            const { data, error } = await supabase.from("borrower_loans").select("id, amount, loan_status, start_payment_date, duration, borrower_name").eq("lender_id", ID);
 
             if (error) {
                 throw error;
@@ -72,17 +68,17 @@ export const RetrieveData = {
 
             const loans: LoanData[] = data.map((loan: 
                 { id: string; 
-                name: string; 
                 amount: number; 
-                status: string ;
-                type : string;
-                monthstorepay : number}) => ({
+                loan_status: string;
+                start_payment_date: number;
+                duration : number;
+                borrower_name : string}) => ({
                     id: loan.id,
-                    borrowerName: loan.name,
-                    owing: loan.amount,
-                    status: loan.status,
-                    type: loan.type,
-                    monthstorepay: loan.monthstorepay,
+                    amount : loan.amount,
+                    loan_status : loan.loan_status,
+                    start_payment_date : loan.start_payment_date,
+                    duration : loan.duration,
+                    borrower_name : loan.borrower_name
                 }));
 
             setloans(loans);
@@ -130,45 +126,6 @@ export const RetrieveData = {
             }
         }
     },
-
-    async get_loan_history (ID : string) {
-        const { setloans } = useLoanData();
-        const { addMessage } = useMessages();
-        try {
-            if (!ValidationSet.isset(ID)){
-                throw new Error("Please Login");
-            }
-            const { data, error } = await supabase.from("getloans").select("id, name, amount, status, type, monthstorepay").eq("lender_id", ID);
-
-            if (error) {
-                throw error;
-            }
-
-            const loans: LoanData[] = data.map((loan: 
-                { id: string; 
-                name: string; 
-                amount: number; 
-                status: string ;
-                type : string;
-                monthstorepay : number}) => ({
-                    id: loan.id,
-                    borrowerName: loan.name,
-                    owing: loan.amount,
-                    status: loan.status,
-                    type: loan.type,
-                    monthstorepay: loan.monthstorepay,
-                }));
-
-            setloans(loans);
-            addMessage({ message: "Loan data fetched successfully", serverity: "success" });
-        } catch (error) {
-            if (error instanceof Error) {
-                addMessage({ message: error.message, serverity: "error" });
-            } else {
-                addMessage({ message: "Failed to get loan history. Check Internet Connectivity", serverity: "error" });
-            }
-        }
-    }
 };
 
 export const SendData = {
@@ -209,26 +166,35 @@ export const SendData = {
 
 export const Authenticate = {
     async login (Username : string , Password : string) {
-            const navigate = useNavigate();
             const{addMessage} = useMessages();
             const {setLender} = useLender();
+            let lender_id;
         try{
-            const {data, error} = await supabase.from("lender").select(
-                "id, business_name, phone_number, email_address, Interest_rate, username, password"
-            ).eq("username", Username).eq("password", Password);
+            
+            const {data, error} = await supabase.from("credentials").select("lender_id").eq("username", Username).eq("user_password", Password);
+            
+            //fix
+            lender_id = data[0].lender_id;
+            
             if (error) {
                 throw error;
             }
-            if (data?.length === 0) {
-                addMessage({message: "Invalid username or password", serverity: "error"})
-                throw error;
-            }
-            const lender : LenderInfo = data![0];
-            setLender(lender)
+            else 
+                if (data?.length === 0) {
+                    throw Error("Invalid username or password");
+                }
+                else {
+                    const {data, error} = await supabase.from("lender").select("lender_id id, business_name, phone_number, email_address, interest_rate").eq("lender_id" , lender_id)
+                
+                    if (error){
+                        throw error;
+                    }else if (data.length === 0){
+                        throw Error("Invalid username or password");
+                    }
 
-            addMessage({message: "Login successful", serverity: "success"})
-            useSession.setState({isLogged : true})
-            navigate(paths.dashboard)
+                    //const lender : LenderInfo = data[0];
+                    setLender(data[0])
+                }
         }
         catch(error){
             if (error instanceof Error){
@@ -239,4 +205,12 @@ export const Authenticate = {
             }
         }
     }
+}
+
+export const Analytics = {
+    
+}
+
+export const dumpState = () => {
+
 }

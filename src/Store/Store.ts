@@ -28,7 +28,7 @@ type Session = {
 }
 
 export const useSession = create <Session> (() => ({
-    isLogged : true
+    isLogged : false
 }))
 //end of login state
 
@@ -61,5 +61,5 @@ type OpenLogin = {
 }
 
 export const useOpenLogin = create <OpenLogin> (() => ({
-    isOpen : false
+    isOpen : true
 }))

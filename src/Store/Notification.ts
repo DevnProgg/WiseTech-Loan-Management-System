@@ -14,7 +14,12 @@ interface NotificationState {
 }
 
 export const useNotifications = create<NotificationState> ((set) => ({
-    notifications : [],
+    notifications : [{
+        id : 1,
+        title : "Update App",
+        message : "Please update software as soon as possible for security puposes",
+        date : "01 Feb 2025"
+    }],
     setNotifications : (notifications) => set({notifications : notifications}),
 }))
 

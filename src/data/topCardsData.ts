@@ -10,5 +10,15 @@ export const topCardsData: TopCard[] = [
     title: 'Active Loans',
     count: '100',
   },
+  {
+    id : 2,
+    title: 'Plan',
+    count: 'Enterprise Plan'
+  },
+  {
+    id : 3,
+    title : 'Late Payments',
+    count : '3'
+  }
 
 ];

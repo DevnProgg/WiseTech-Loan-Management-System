@@ -21,7 +21,6 @@
     "@supabase/supabase-js": "^2.48.0",
     "@tauri-apps/api": "^2.5.0",
     "@tauri-apps/plugin-sql": "^2.2.0",
-    "alasql": "^4.6.6",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "class-variance-authority": "^0.7.1",

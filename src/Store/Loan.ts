@@ -3,12 +3,12 @@ import {create} from "zustand"
 //state managing loan data
 
 export interface LoanData {
-    loan_id: string;
+    id: string;
     amount : number;
     loan_status : string;
     start_payment_date : number;
     duration : number;
-    borrowe_id : string;
+    borrower_name : string;
 }
 
 interface LoanDataState {
@@ -18,7 +18,24 @@ interface LoanDataState {
 }
 
 export const useLoanData = create <LoanDataState> ((set) => ({
-    loans : [],
+    loans : [
+        {
+            id : "RehTha-1-1",
+            amount : 1500.00,
+            loan_status : "Pending",
+            start_payment_date : 25,
+            duration : 1 ,
+            borrower_name : "Relebohile Thato"
+        },
+        {
+            id : "LehMoh-1-1",
+            amount : 2500.00,
+            loan_status : "Paid",
+            start_payment_date : 30,
+            duration : 0 ,
+            borrower_name : "Lerato Mohapi"
+        }
+    ],
     setloans : (loanss) => set({loans : loanss}),
 }))
 

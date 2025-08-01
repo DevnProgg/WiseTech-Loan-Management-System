@@ -6,16 +6,16 @@ import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconifyIcon from 'components/base/IconifyIcon';
 import DataTable from './dataTable';
-import { useLender } from 'Store/Lender';
+//import { useLender } from 'Store/Lender';
 import { useDataChange } from 'Store/DataChange';
-import { RetrieveData } from 'data/algorithms';
+//import { RetrieveData } from 'data/algorithms';
 
 const BorrowersTable = () => {
   const [searchText, setSearchText] = useState('');
-  const id = useLender((state) => state.lender.id);
+  //const id = useLender((state) => state.lender.id);
 
   useEffect(() => {
-      RetrieveData.get_borrowers(id);
+      //RetrieveData.get_borrowers(id);
   }, [useDataChange((state) => state.loanChange)]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

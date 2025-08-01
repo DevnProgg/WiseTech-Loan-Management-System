@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import {Button} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Stack from '@mui/material/Stack';
@@ -18,23 +18,30 @@ import IconButton from '@mui/material/IconButton';
 //import FormControlLabel from '@mui/material/FormControlLabel';
 //import Checkbox from '@mui/material/Checkbox';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Authenticate } from 'data/algorithms';
 
-interface User {
+/*interface User {
     [key: string]: string;
-}
+}*/
 
 export default function Login() {
     const open: boolean = useOpenLogin((state) => (state.isOpen));
-    const [user, setUser] = React.useState<User>({ email: '', password: '' });
+    //const [user, setUser] = React.useState<User>({ email: '', password: '' });
+    const [email, setEmail] = React.useState('')
+    const [password, setPassword] = React.useState('')
     const [showPassword, setShowPassword] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    /*const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value });
-    };
+    };*/
     
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleSubmit = () => {
+        setLoading(true);
+        Authenticate.login(email, password);
+        setLoading(false);
+        setEmail('');
+        setPassword('');
     };
 
     const handleClose  = () => {
@@ -55,15 +62,15 @@ export default function Login() {
 
                         <Divider sx={{ my: 4.5 }}>Welcome</Divider>
 
-                        <Box component="form" onSubmit={(e) => {handleSubmit(e); setLoading(true);}}>
+                        <Box component="form">
                             <TextField
                             id="email"
                             name="email"
                             type="text"
                             color="secondary"
                             label="Username"
-                            value={user.email}
-                            onChange={handleInputChange}
+                            value={email}
+                            onChange={(e) => {setEmail(e.target.value)}}
                             variant="filled"
                             placeholder="mail@example.com"
                             sx={{ mt: 3 }}
@@ -77,8 +84,8 @@ export default function Login() {
                             label="Password"
                             color="secondary"
                             type={showPassword ? 'text' : 'password'}
-                            value={user.password}
-                            onChange={handleInputChange}
+                            value={password}
+                            onChange={(e) => {setPassword(e.target.value)}}
                             variant="filled"
                             placeholder="Min. 8 characters"
                             autoComplete="current-password"
@@ -90,8 +97,8 @@ export default function Login() {
                                 <InputAdornment
                                     position="end"
                                     sx={{
-                                    opacity: user.password ? 1 : 0,
-                                    pointerEvents: user.password ? 'auto' : 'none',
+                                    opacity: password ? 1 : 0,
+                                    pointerEvents: password ? 'auto' : 'none',
                                     }}
                                 >
                                     <IconButton
@@ -122,7 +129,7 @@ export default function Login() {
                             </Link>*/}
                             </Stack>
                             {
-                            loading ? <center><CircularProgress style={{marginTop : "10%"}} /></center> : <Button type="submit" variant="contained" size="large" sx={{ mt: 3 }} fullWidth>
+                            loading ? <center><CircularProgress style={{marginTop : "10%"}} /></center> : <Button variant="contained" size="large" sx={{ mt: 3 }} fullWidth onClick={handleSubmit} >
                             Sign In
                             </Button>
                             }

@@ -22,12 +22,14 @@ const TopLoans = () => {
       {
         topProductsData.length != 0 ? <Box mt={3}>
         {topProductsData.slice(0, 2).map((item, index) => (
-          <React.Fragment key={item.borrowe_id}>
+          <React.Fragment key={item.id}>
             <LoanCard data={item} />
-            {index !== 1 && <Divider  />}
+            {index !== 1 && <Divider  component={"hr"}/>}
           </React.Fragment>
         ))}
-      </Box> : <center><CircularProgress style={{ marginTop: '20%', marginBottom: '20%'}}/></center>
+      </Box> : <center>
+                  <CircularProgress style={{ marginTop: '20%', marginBottom: '20%'}}/>
+                </center>
       }
     </Paper>
   );

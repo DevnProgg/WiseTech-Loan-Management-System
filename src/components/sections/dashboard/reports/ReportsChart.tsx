@@ -109,6 +109,7 @@ const ReportsChart = ({ data, ...rest }: ClientChartProps) => {
           'Oct',
           'Nov',
           'Dec',
+          ' ',
         ],
         axisTick: {
           show: false,
@@ -131,8 +132,8 @@ const ReportsChart = ({ data, ...rest }: ClientChartProps) => {
       },
       yAxis: {
         type: 'value',
-        interval: 20000,
-        max: 100000,
+        interval: 20,
+        max: 100,
         splitLine: {
           show: true,
           lineStyle: {
@@ -148,7 +149,7 @@ const ReportsChart = ({ data, ...rest }: ClientChartProps) => {
           fontSize: theme.typography.caption.fontSize,
           fontWeight: 400,
           formatter: (value: number) => {
-            return value >= 1000 ? `${value / 1000}K` : value;
+            return value >= 0 ? `${value}%` : value;
           },
         },
       },
@@ -157,12 +158,12 @@ const ReportsChart = ({ data, ...rest }: ClientChartProps) => {
           data: data,
           type: 'line',
           smooth: true,
-          showSymbol: false,
+          showSymbol: true,
           emphasis: {
             focus: 'none',
-            scale: 3,
+            scale: 5,
             itemStyle: {
-              borderWidth: 3,
+              borderWidth: 4,
               borderColor: theme.palette.primary.lighter,
               color: theme.palette.info.lighter,
             },

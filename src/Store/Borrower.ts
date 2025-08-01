@@ -14,7 +14,7 @@ export const useVet = create <vetBorrower> (() => ({
 //state managing borrower data
 
 export interface BorrowerData {
-    borrower_id : string;
+    id : string;
     borrower_name : string;
     phone_number : number;
     email_address : string;
@@ -26,7 +26,20 @@ interface BorrowerDataState {
 }
 
 export const useBorrowerData = create<BorrowerDataState> ((set) => ({
-    borrowers : [],
+    borrowers : [
+        {
+            id : "LehMoh-1",
+            borrower_name : "Lerato Mohapi",
+            phone_number : 57502734,
+            email_address : "lerato@gmail.com"
+        },
+        {
+            id : "RelTha-1",
+            borrower_name : "Relebohile Thato",
+            phone_number : 59952834,
+            email_address : "Relebohile@gmail.com"
+        }
+    ],
     setBorrowers : (borrowerss) => set({borrowers : borrowerss}),
 }))
 

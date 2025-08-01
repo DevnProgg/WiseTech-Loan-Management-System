@@ -4,7 +4,11 @@ import Typography from '@mui/material/Typography';
 import ReportsChart from './ReportsChart'; 
 
 
+
+
 const Reports = () => {
+  const data : number[] = [40,55,60,57,69,80,80,85];
+
   return (
     <Paper sx={{ pr: 0, height: 410 }}>
       <Stack mt={-0.5} pr={3.5} alignItems="center" justifyContent="space-between">
@@ -13,10 +17,7 @@ const Reports = () => {
         </Typography>
 
       </Stack>
-      <ReportsChart
-        data={[0,0,0,0,0,0,0,0,0,0,0,0]}
-        sx={{ height: '320px !important' }}
-      />
+      <ReportsChart data={data} sx={{ height: '320px !important' }} />
     </Paper>
   );
 };

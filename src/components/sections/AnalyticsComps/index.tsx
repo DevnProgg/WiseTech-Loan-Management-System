@@ -14,7 +14,7 @@ const DefaultPayments = () => {
 
       </Stack>
       <DefaultsChart
-        data={[0,0,0,0,0,0,0,0,0,0,0,0]}
+        data={[10, 13, 24, 23, 43, 54, 56, 67, 67,]}
         sx={{ height: '320px !important' }}
       />
     </Paper>

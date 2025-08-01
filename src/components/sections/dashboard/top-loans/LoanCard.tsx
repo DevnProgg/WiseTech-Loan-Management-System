@@ -22,7 +22,7 @@ const LoanCard = ({ data }: LoanCardProps) => {
               display="block"
               mb={0.75}
             >
-              {data.borrowe_id}
+              {data.borrower_name}
             </Typography>
             <Typography
               variant="body1"

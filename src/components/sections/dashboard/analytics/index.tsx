@@ -6,12 +6,12 @@ import AnalyticsChart from './AnalyticsChart';
 const AnalyticsData = [
   {
     id: 1,
-    value: 60,
+    value: 1,
     name: 'Paid',
   },
   {
     id: 2,
-    value: 45,
+    value: 1,
     name: 'Pending',
   },
 ];

@@ -32,12 +32,6 @@ const menuItems: MenuItems[] = [
     path: paths.notification
   },
   {
-    id: 5,
-    title: 'Help Center',
-    icon: 'mdi:help-circle-outline',
-    path: paths[404]
-  },
-  {
     id: 6,
     title: 'Logout',
     icon: 'mdi:logout',

@@ -10,7 +10,7 @@ import DataTable from '../../Loans/History/DataTable';
 
 
 const RecentOrders = () => {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('Pending');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
