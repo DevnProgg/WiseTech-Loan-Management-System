@@ -18,7 +18,7 @@ import IconButton from '@mui/material/IconButton';
 //import FormControlLabel from '@mui/material/FormControlLabel';
 //import Checkbox from '@mui/material/Checkbox';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Authenticate } from 'data/algorithms';
+//import { Authenticate } from 'data/algorithms';
 
 /*interface User {
     [key: string]: string;
@@ -38,7 +38,7 @@ export default function Login() {
     
     const handleSubmit = () => {
         setLoading(true);
-        Authenticate.login(email, password);
+        useOpenLogin.setState({isOpen : false});
         setLoading(false);
         setEmail('');
         setPassword('');

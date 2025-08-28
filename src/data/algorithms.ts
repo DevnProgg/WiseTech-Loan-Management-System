@@ -3,8 +3,8 @@ import { supabase } from "./database";
 import { useMessages } from "Store/Error";
 import { useLoanData, LoanData } from "Store/Loan";
 import { useNotifications } from "Store/Notification";
-import { LenderInfo, useLender } from "Store/Lender";
-import { useOpenLogin} from "Store/Store";
+//import { LenderInfo, useLender } from "Store/Lender";
+//import { useOpenLogin} from "Store/Store";
 
 const ValidationSet = {
     isset (StringVar : string) {
@@ -131,50 +131,49 @@ export const RetrieveData = {
 export const SendData = {
     
     async update_settings (ID : string, InterestRate : string, PhoneNumber : string, Email : string, BusinessName :string){
-            const { addMessage } = useMessages()
-            const { setLender } = useLender()
-            try{
-                if (!ValidationSet.isset(InterestRate) || !ValidationSet.isset(PhoneNumber) || !ValidationSet.isset(Email) || !ValidationSet.isset(BusinessName)){
-                    throw new Error("Make sure the fields are not empty");
-                }
-                else if (!ValidationSet.isset(ID)){
-                    throw new Error("Please Login");
-                }
-                const {data, error} = await supabase.from("lender").update({
-                    "Interest_rate" : InterestRate,
-                    "phone_number" : PhoneNumber,
-                    "email_address" : Email,
-                    "business_name" : BusinessName
-                }).eq("id", ID).select( "id, business_name, phone_number, email_address, Interest_rate, username, password");
+        //     const { addMessage } = useMessages()
+        //    // const { setLender } = useLender()
+        //     try{
+        //         if (!ValidationSet.isset(InterestRate) || !ValidationSet.isset(PhoneNumber) || !ValidationSet.isset(Email) || !ValidationSet.isset(BusinessName)){
+        //             throw new Error("Make sure the fields are not empty");
+        //         }
+        //         else if (!ValidationSet.isset(ID)){
+        //             throw new Error("Please Login");
+        //         }
+        //         const {data, error} = await supabase.from("lender").update({
+        //             "Interest_rate" : InterestRate,
+        //             "phone_number" : PhoneNumber,
+        //             "email_address" : Email,
+        //             "business_name" : BusinessName
+        //         }).eq("id", ID).select( "id, business_name, phone_number, email_address, Interest_rate, username, password");
         
-                if(error) {
-                    throw error;
-                }
+        //         if(error) {
+        //             throw error;
+        //         }
         
-                setLender(data[0]);
-                addMessage({message: "Settings Updated", serverity: "success"});
+        //         //setLender(data[0]);
+        //         addMessage({message: "Settings Updated", serverity: "success"});
         
-            }catch(error){
-                if (error instanceof Error) {
-                addMessage({ message: error.message, serverity: "error" });
-            } else {
-                addMessage({ message: "Failed to update settings. Check Internet Connectivity", serverity: "error" });
-            }
-            }
+        //     }catch(error){
+        //         if (error instanceof Error) {
+        //         addMessage({ message: error.message, serverity: "error" });
+        //     } else {
+        //         addMessage({ message: "Failed to update settings. Check Internet Connectivity", serverity: "error" });
+        //     }
+        //     }
+        //this function has errors, this is just a temporary fix
+        console.log(ID, InterestRate,PhoneNumber,Email,BusinessName);
     }
 };
 
 export const Authenticate = {
     async login (Username : string , Password : string) {
             const{addMessage} = useMessages();
-            const {setLender} = useLender();
+            //const {setLender} = useLender();
             let lender_id;
         try{
             
             const {data, error} = await supabase.from("credentials").select("lender_id").eq("username", Username).eq("user_password", Password);
-            
-            //fix
-            lender_id = data[0].lender_id;
             
             if (error) {
                 throw error;
@@ -193,7 +192,7 @@ export const Authenticate = {
                     }
 
                     //const lender : LenderInfo = data[0];
-                    setLender(data[0])
+                    //setLender(Lender)
                 }
         }
         catch(error){

@@ -15,7 +15,6 @@ const Borrowers = lazy(()=> import('pages/Borrowers'));
 const NotificationPage = lazy(()=> import('pages/Notifications'));
 const Settings = lazy(()=> import('pages/Settings'));
 const InternetConnectivity = lazy(()=> import('pages/Offline'))
-const SignIn = lazy(() => import('pages/authentication/SignIn'));
 const SignUp = lazy(() => import('pages/authentication/SignUp'));
 const Locked= lazy(() => import('pages/authentication/Locked'));
 const Error404 = lazy(() => import('pages/errors/Error404'));
@@ -154,14 +153,6 @@ const routes = [
           </Suspense>
         ),
         children: [
-          {
-            path: paths.signin,
-            element: (
-              <AuthLayout>
-                <SignIn />
-              </AuthLayout>
-            ),
-          },
           {
             path: paths.signup,
             element: (
