@@ -19,7 +19,7 @@ export default function OldLoan() {
   const [loan, setLoan] = React.useState(0);
   const [months, setMonths] = React.useState("");
   const [borrowers, setBorrowers] = React.useState<{ label: string }[]>([])
-  const id = useLender((state) => state.lender.id)
+  const id = useLender((state) => state.id)
   const {setLoanChange} = useDataChange()
   const {addMessage} = useMessages()
   const [loading, setLoading] = React.useState(false)

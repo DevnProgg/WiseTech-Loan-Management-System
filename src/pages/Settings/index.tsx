@@ -17,7 +17,7 @@ export default function Settings() {
   const [phone_number, setPhoneNumber] = React.useState(useLender((state) => state.lender.phone_number.toString()))
   const [email, setEmail] = React.useState(useLender((state) => state.lender.email_address))
   const [business, setBusiness] = React.useState(useLender((state) => state.lender.business_name))
-  const id = useLender((state) => state.lender.id);
+  const id = useLender((state) => state.id);
   const [loading, setLoading] = React.useState(false)
   const settings = useFieldStore((state) => (state.fields));
 

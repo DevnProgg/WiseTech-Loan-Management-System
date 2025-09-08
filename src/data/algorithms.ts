@@ -3,8 +3,8 @@ import { supabase } from "./database";
 import { useMessages } from "Store/Error";
 import { useLoanData, LoanData } from "Store/Loan";
 import { useNotifications } from "Store/Notification";
-//import { LenderInfo, useLender } from "Store/Lender";
-//import { useOpenLogin} from "Store/Store";
+import { UpdateInfo, useLender } from "Store/Lender";
+import { useOpenLogin} from "Store/Store";
 
 const ValidationSet = {
     isset (StringVar : string) {
@@ -131,50 +131,51 @@ export const RetrieveData = {
 export const SendData = {
     
     async update_settings (ID : string, InterestRate : string, PhoneNumber : string, Email : string, BusinessName :string){
-        //     const { addMessage } = useMessages()
-        //    // const { setLender } = useLender()
-        //     try{
-        //         if (!ValidationSet.isset(InterestRate) || !ValidationSet.isset(PhoneNumber) || !ValidationSet.isset(Email) || !ValidationSet.isset(BusinessName)){
-        //             throw new Error("Make sure the fields are not empty");
-        //         }
-        //         else if (!ValidationSet.isset(ID)){
-        //             throw new Error("Please Login");
-        //         }
-        //         const {data, error} = await supabase.from("lender").update({
-        //             "Interest_rate" : InterestRate,
-        //             "phone_number" : PhoneNumber,
-        //             "email_address" : Email,
-        //             "business_name" : BusinessName
-        //         }).eq("id", ID).select( "id, business_name, phone_number, email_address, Interest_rate, username, password");
+            const { addMessage } = useMessages()
+            const { setLender } = useLender()
+            try{
+                if (!ValidationSet.isset(InterestRate) || !ValidationSet.isset(PhoneNumber) || !ValidationSet.isset(Email) || !ValidationSet.isset(BusinessName)){
+                    throw new Error("Make sure the fields are not empty");
+                }
+                else if (!ValidationSet.isset(ID)){
+                    throw new Error("Please Login");
+                }
+                const {data, error} = await supabase.from("lender").update({
+                    "interest_rate" : InterestRate,
+                    "phone_number" : PhoneNumber,
+                    "email_address" : Email,
+                    "business_name" : BusinessName
+                }).eq("id", ID).select( "business_name, phone_number, email_address, Interest_rate");
         
-        //         if(error) {
-        //             throw error;
-        //         }
+                if(error) {
+                    throw error;
+                }
+                
+                const result: UpdateInfo = {
+                    "business_name" : String(data[0].business_name),
+                    "email_address" : String(data[0].email_address),
+                    "interest_rate" : Number(data[0].Interest_rate),
+                    "phone_number" : Number(data[0].phone_number)
+
+                }
+                setLender(result);
+                addMessage({message: "Settings Updated", serverity: "success"});
         
-        //         //setLender(data[0]);
-        //         addMessage({message: "Settings Updated", serverity: "success"});
-        
-        //     }catch(error){
-        //         if (error instanceof Error) {
-        //         addMessage({ message: error.message, serverity: "error" });
-        //     } else {
-        //         addMessage({ message: "Failed to update settings. Check Internet Connectivity", serverity: "error" });
-        //     }
-        //     }
-        //this function has errors, this is just a temporary fix
-        console.log(ID, InterestRate,PhoneNumber,Email,BusinessName);
+            }catch(error){
+                if (error instanceof Error) {
+                addMessage({ message: error.message, serverity: "error" });
+            } else {
+                addMessage({ message: "Failed to update settings. Check Internet Connectivity", serverity: "error" });
+            }
+            }
     }
 };
 
 export const Authenticate = {
-    async login (Username : string , Password : string) {
+    async getID (Usr : string, Psswd : string){
             const{addMessage} = useMessages();
-            //const {setLender} = useLender();
-            let lender_id;
         try{
-            
-            const {data, error} = await supabase.from("credentials").select("lender_id").eq("username", Username).eq("user_password", Password);
-            
+            const {data, error} = await supabase.from("credentials").select("lender_id").eq("username", Usr).eq("user_password", Psswd);
             if (error) {
                 throw error;
             }
@@ -182,18 +183,43 @@ export const Authenticate = {
                 if (data?.length === 0) {
                     throw Error("Invalid username or password");
                 }
-                else {
-                    const {data, error} = await supabase.from("lender").select("lender_id id, business_name, phone_number, email_address, interest_rate").eq("lender_id" , lender_id)
+            return String(data[0].lender_id);
+        }
+        catch(error){
+            if (error instanceof Error){
+                addMessage({message: error.message, serverity: "error"});
+            }
+            else {
+                addMessage({message: "Check Internet connectivity", serverity: "error"});
+            }
+            return " ";
+        }
+    },
+    async login (Username : string , Password : string) {
+            const{addMessage} = useMessages();
+            const {setLender} = useLender();
+            const {setID} = useLender();
+            let lender_id;
+        try{
+                lender_id = await this.getID(Username, Password);
+                const {data, error} = await supabase.from("lender").select("business_name, phone_number, email_address, interest_rate").eq("lender_id" , lender_id)
                 
-                    if (error){
-                        throw error;
-                    }else if (data.length === 0){
-                        throw Error("Invalid username or password");
-                    }
-
-                    //const lender : LenderInfo = data[0];
-                    //setLender(Lender)
+                if (error){
+                    throw error;
+                }else if (data.length === 0){
+                    throw Error("Invalid username or password");
                 }
+
+                const lender : UpdateInfo = {
+                    "business_name" : String(data[0].business_name),
+                    "email_address" : String(data[0].email_address),
+                    "interest_rate" : Number(data[0].interest_rate),
+                    "phone_number" : Number(data[0].phone_number)
+                };
+                setLender(lender);
+                setID(lender_id);
+                useOpenLogin.setState({isOpen : false});
+
         }
         catch(error){
             if (error instanceof Error){
