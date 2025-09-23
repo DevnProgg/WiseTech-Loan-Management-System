@@ -3,7 +3,7 @@ import {Button} from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Stack from '@mui/material/Stack';
-import { useOpenLogin } from 'Store/Store';
+import { useOpenLogin } from 'Store/Login';
 import IconifyIcon from 'components/base/IconifyIcon';
 import Link  from "@mui/material/Link" 
 import Logo from 'assets/wise tech.png';

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import paths from 'routes/paths';
 import {Grid, Icon, LinearProgress, Stack, TextField, Typography } from '@mui/material';
 import { useLender } from 'Store/Lender';
-import { useFieldSettings } from 'Store/Store';
+import { useFieldSettings } from 'Store/FieldSettings';
 import { useFieldStore } from 'Store/Fields';
 import { SendData } from 'data/algorithms';
 

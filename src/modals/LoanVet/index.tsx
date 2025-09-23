@@ -1,7 +1,8 @@
 import { Dialog, DialogContentText, DialogActions, Button } from "@mui/material";
 import React from "react";
 import { useVet } from 'Store/Borrower';
-import { useOpenVet, usePersonalData } from "Store/Store";
+import { useOpenVet } from "Store/Vet";
+import { usePersonalData } from "Store/PersonalData";
 
 export default function Vet () {
     const open = useOpenVet((state) => (state.isOpen))
