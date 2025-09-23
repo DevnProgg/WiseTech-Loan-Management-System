@@ -3,16 +3,16 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button, Grid } from '@mui/material';
-import { useUpdateUserActions } from 'Store/Store';
+import { useActions } from 'Store/Actions';
 
 
-export default function Updateuser() {
+export default function Actions() {
   //state
-  const open = useUpdateUserActions((state) => (state.isOpen))
+  const open = useActions((state) => (state.isOpen))
 
   //functions
   const handleClose = () => {
-    useUpdateUserActions.setState({isOpen: false})
+    useActions.setState({isOpen: false})
   };
 
   //jsx
@@ -34,6 +34,10 @@ export default function Updateuser() {
 
       <Button fullWidth variant='contained'>Add Manual Cash Payment</Button>
 
+    </Grid>
+
+    <Grid item xs={12}>
+      <Button fullWidth variant='contained'>See Full Details</Button>
     </Grid>
 
   </Grid>

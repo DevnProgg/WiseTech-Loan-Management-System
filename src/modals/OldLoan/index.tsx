@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Divider, Grid, TextField, Typography, Autocomplete, LinearProgress, Alert } from '@mui/material';
-import { useOpenCard} from 'Store/Store';
+import { useAddLoan} from 'Store/AddLoan';
 import { supabase } from 'data/database';
 import { useVet } from 'Store/Borrower';
 import { useDataChange } from 'Store/DataChange';
@@ -27,7 +27,7 @@ export default function OldLoan() {
 
   const handleClose = () => {
     if(!loading){
-    useOpenCard.setState({openCard: false})
+    useAddLoan.setState({openCard: false})
     useVet.setState({isVet: false})
     }
   };

@@ -4,7 +4,7 @@ import { useMessages } from "Store/Error";
 import { useLoanData, LoanData } from "Store/Loan";
 import { useNotifications } from "Store/Notification";
 import { UpdateInfo, useLender } from "Store/Lender";
-import { useOpenLogin} from "Store/Store";
+import { useOpenLogin} from "Store/Login";
 
 const ValidationSet = {
     isset (StringVar : string) {

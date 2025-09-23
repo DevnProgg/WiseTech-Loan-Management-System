@@ -1,5 +1,5 @@
 import { Fab } from "@mui/material";
-import { useOpenVet } from "Store/Store";
+import { useOpenVet } from "Store/Vet";
 
 interface FabStyle {
     position: 'fixed';

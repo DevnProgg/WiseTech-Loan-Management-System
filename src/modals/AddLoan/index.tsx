@@ -5,14 +5,15 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {Divider, Grid, TextField, Typography } from '@mui/material';
-import { useOpenCard, useOpenVet } from 'Store/Store';
+import { useAddLoan } from 'Store/AddLoan';
+import { useOpenVet } from 'Store/Vet';
 
 
 
 export default function AddLoan() {
 
   //state
-  const open = useOpenCard((state) => (state.openCard))
+  const open = useAddLoan((state) => (state.openCard))
   const [loan, setLoan] = React.useState(0)
   const [typeofloan, setTypeOfLoan] = React.useState(false);
   const [monthsToPay, setMonthsToPay] = React.useState(0);
@@ -22,7 +23,7 @@ export default function AddLoan() {
   //functions
   const handleClose  = () => {
     useOpenVet.setState({isOpen:false})
-    useOpenCard.setState({openCard: false})
+    useAddLoan.setState({openCard: false})
   };
 
   return (

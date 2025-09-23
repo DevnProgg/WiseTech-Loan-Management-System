@@ -1,7 +1,8 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useFieldStore } from "Store/Fields";
-import { useOpenCard, usePersonalData } from "Store/Store";
+import { usePersonalData } from "Store/PersonalData";
+import { useAddLoan } from "Store/AddLoan";
 
 
 export default function PersonalData () {
@@ -36,7 +37,7 @@ export default function PersonalData () {
         // Handle the next step logic here
         console.log(values.x); // You can use the values as needed
         handleClose(); // Close the dialog after handling the next 
-        useOpenCard.setState({openCard: true}) // Open the next dialog or perform any other action
+        useAddLoan.setState({openCard: true}) // Open the next dialog or perform any other action
     }
 
     return (

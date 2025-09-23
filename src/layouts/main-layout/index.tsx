@@ -5,13 +5,13 @@ import Sidebar from './sidebar';
 import Topbar from './topbar';
 import Footer from './footer';
 import FAB from 'components/base/FAB';
-import AddLoan from 'pages/AddLoan';
-import Updateuser from 'pages/UpdateUser';
-import OldLoan from 'pages/OldLoan';
+import AddLoan from 'modals/AddLoan';
+import Actions from 'modals/Actions';
+import OldLoan from 'modals/OldLoan';
 import Cookie from 'components/base/Cookie';
-import { AddFields } from 'pages/AddFields';
-import PersonalData from 'pages/AddPersonalData';
-import Vet from 'pages/LoanVet';
+import { AddFields } from 'modals/AddFields';
+import PersonalData from 'modals/AddPersonalData';
+import Vet from 'modals/LoanVet';
 import Login from 'pages/Login';
 
 interface FabStyle {
@@ -55,7 +55,7 @@ const MainLayout = ({ children }: React.PropsWithChildren) => {
     <PersonalData />
     <AddFields />
       <AddLoan />
-      <Updateuser />
+      <Actions />
       <OldLoan />
       <Cookie />
       <Login />

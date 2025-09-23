@@ -4,7 +4,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import { Field, useFieldStore } from 'Store/Fields';
-import { useFieldSettings } from 'Store/Store';
+import { useFieldSettings } from 'Store/FieldSettings';
 
 export function AddFields () {
 

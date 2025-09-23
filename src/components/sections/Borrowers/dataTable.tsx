@@ -3,12 +3,12 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { DataGrid, GridColDef, useGridApiRef, GridApi } from '@mui/x-data-grid';
 import DataGridFooter from 'components/common/DataGridFooter';
-import { useUpdateUserActions } from 'Store/Store';
+import { useActions } from 'Store/Actions';
 import { Button } from '@mui/material';
 import { useBorrowerData } from 'Store/Borrower';
 
 const handleClicker = () => {
-  useUpdateUserActions.setState({isOpen: true});
+  useActions.setState({isOpen: true});
 }
 
 interface TaskOverviewTableProps {
