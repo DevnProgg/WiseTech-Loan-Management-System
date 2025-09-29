@@ -20,7 +20,7 @@
     "@mui/x-data-grid": "^7.18.0",
     "@supabase/supabase-js": "^2.48.0",
     "@tauri-apps/api": "^2.5.0",
-    "@tauri-apps/plugin-sql": "^2.2.0",
+    "@tauri-apps/plugin-sql": "^2.3.0",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
     "class-variance-authority": "^0.7.1",

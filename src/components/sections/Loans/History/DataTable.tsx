@@ -19,7 +19,7 @@ interface TaskOverviewTableProps {
 const DataTable = ({ searchText }: TaskOverviewTableProps) => {
   const apiRef = useGridApiRef<GridApi>();
   const rows = useLoanData((state) => state.loans);
-  //const history = alasql<LoanData>('SELECT * FROM ? WHERE loan_status = "Paid"', [rows]);
+
 
   useEffect(() => {
     apiRef.current.setQuickFilterValues(searchText.split(/\b\W+\b/).filter((word) => word !== ''));

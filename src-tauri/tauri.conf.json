@@ -1,8 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "Wise Tech loan Management System",
-  "version": "0.0.1",
-  "identifier": "com.wisetech.tsc",
+  "productName": "Wise Tech - Loan Management System",
+  "version": "0.1.0",
+  "identifier": "com.tauri.dev",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:3000",
@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "Wise Tech - Loan Management System",
-        "width": 1500,
-        "height": 900,
+        "width": 800,
+        "height": 600,
         "resizable": true,
         "fullscreen": false
       }
